@@ -1,0 +1,150 @@
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #222;
+}
+
+@media (max-width: 90em) {
+    #navbar ul {
+        font-size: 2em;
+    }
+    
+    li {
+    padding: 20px 10px 20px 10px;
+    background-color: #333;
+    border-radius: 10%;
+    border: solid #444 2px;
+    }
+}
+
+
+#navbar li {
+    float: left;
+}
+
+#navbar li a {
+    display: block;
+    text-align: center;
+    padding: 18px 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #333;
+    border-radius: 8%;
+}
+
+li:nth-child(1) a{
+    cursor: pointer;
+    margin-right: 0.2em;
+}
+
+#navbar li a:hover {
+    background-color: #111;
+}
+
+/* --------- SubMenu -------- */
+#subMenu a{
+    background-color: darkslategray;
+    border-radius: 40%;
+    font-size: small;
+    cursor: pointer;
+}
+
+#subMenu a:hover{
+    font-size: 14px;
+}
+
+/* -------------------------- */
+
+/* --------------------------------- */
+
+#optionMenu{
+    position: fixed;
+    color: whitesmoke;
+    z-index: 1;
+    top:18%;
+    left: 7%;
+    display: none;
+}
+
+#mainMenu ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#mainMenu li a{
+    display: block;
+    width: 120px;
+    background-color: #333333;
+    margin-bottom: 2px;
+    text-align: center;
+    padding: 10px 30px 10px 30px;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+#optionMenu li a:hover{
+    background-color: #111111;
+}
+
+/* ------ general menu ------ */
+.general{
+    display: block;
+    width: 100px;
+    font-size: small;
+    padding: 5px 20px 5px 20px;
+    background-color: #333333;
+    text-align: center;
+    border-radius: 10% 40% 40% 10%;
+    cursor: pointer;
+    margin-bottom: 2px;
+    border-left: 100px;
+}
+#generalLast{
+    margin-bottom: 10px;
+}
+.general:hover{
+    background-color: #111111;
+}
+
+/* -------- Search box -------- */
+#searchBox{
+    background-color: #333333;
+    padding: 20px 10px 20px 15px;
+    border-radius: 10% 40% 40% 10%;
+    display: none;
+}
+
+#searchButton{
+    height: 20px;
+    background-color: whitesmoke;
+    border-color: beige;
+    border-radius: 5%;
+}
+
+#searchInput{
+    background-color: lightgray;
+    border-color: grey;
+}
+
+.results{
+    display: block;
+    width: 150px; /* remember: issue if name is longer than 150px */
+    font-size: x-small;
+    padding: 3px 10px 3px 10px;
+    background-color: #333333;
+    text-align: center;
+    border-radius: 10% 40% 40% 10%;
+    cursor: pointer;
+    margin-bottom: 2px;
+    border-left: 100px;
+}
+
+.results:hover{
+    background-color: #111111;
+}
+
+/* -------- .......... -------- */
