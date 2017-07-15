@@ -103,7 +103,7 @@ calib = GPF.createProduct("Calibration", params0, product)
 ### MAKING SUBSET
 print("Making subset...")
 WKTReader = snappy.jpy.get_type('com.vividsolutions.jts.io.WKTReader')
-wkt = geojson_to_wkt(read_geojson('barentsSea.geojson'))  # Lundin landing site in Barents Sea
+wkt = geojson_to_wkt(read_geojson('veryBigBarentsSea.geojson'))  # Lundin landing site in Barents Sea
 geom = WKTReader().read(wkt)
 
 subsettings = HashMap()
@@ -235,8 +235,8 @@ font = cv2.FONT_HERSHEY_COMPLEX
 cv2.putText(img,('Wind data from ' + obsName + ' observation site'),(10*p,20*p), font, 0.35*p,(0,0,255),p)
 cv2.putText(img,(str(obsSpeed)+" mps, from "+obsDir+". Observation time: "+obsTime+"."),(10*p,40*p),font,0.3*p,(0,0,255),p)
 
-cv2.imwrite('sentinel_images/sentinel_image_autonomousAtHour-' + dateHourMin + '__' + smallestDate + '.png', img)
-print("Wind vector created!")
+cv2.imwrite('sentinel_images/sentinel-image(a)' + '_' + smallestDate + '.png', img)
+print("Wind vector created and added to image!")
 
 #################### DELETING USED FILES AND MAKING ZIP-FILE #################### (only works on linux OS)
 # deletes the used files
