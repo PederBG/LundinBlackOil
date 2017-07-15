@@ -1,8 +1,28 @@
+#!/bin/sh
+''''cd /home/lundinbl/public_html/peder/ && exec /home/lundinbl/Python27_v2/Python-2.7.13/python  -- "$0" # '''
 import time
 import os
 import sys
 sys.path.append("/home/lundinbl/.local/lib/python2.7/site-packages/snappy")
 sys.path.append("/home/lundinbl/.local/lib/python2.7/site-packages/jpy")
+
+class Tee(object):
+    def __init__(self, *streams):
+        self.streams = streams
+    def write(self, obj):
+        for s in self.streams:
+            s.write(obj)
+            s.flush()
+    def flush(self) :
+        for s in self.streams:
+            s.flush()
+
+logFile = open('sentinelDownload.log', 'w')
+
+tee = Tee(sys.stdout, logFile)
+
+sys.stdout = tee
+sys.stderr = tee
 
 
 # connect to the API
@@ -83,7 +103,7 @@ calib = GPF.createProduct("Calibration", params0, product)
 ### MAKING SUBSET
 print("Making subset...")
 WKTReader = snappy.jpy.get_type('com.vividsolutions.jts.io.WKTReader')
-wkt = geojson_to_wkt(read_geojson('veryBigBarentsSea.geojson'))  # Lundin landing site in Barents Sea
+wkt = geojson_to_wkt(read_geojson('barentsSea.geojson'))  # Lundin landing site in Barents Sea
 geom = WKTReader().read(wkt)
 
 subsettings = HashMap()
@@ -244,3 +264,5 @@ for dirname, subdirs, files in os.walk("sentinel_images"):
 zf.close()
 
 print("Process finished !")
+
+logFile.close()
