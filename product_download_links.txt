@@ -1,0 +1,15 @@
+sentinel_images/sentinel-image(a)_16-07-2017_05:11.png https://colhub.met.no/odata/v1/Products('117a0fd9-624c-4692-a19c-783f86e14987')/$value
+sentinel_images/sentinel-image(a)_17-07-2017_15:35.png https://colhub.met.no/odata/v1/Products('ea246ff5-f291-4f0c-a369-883cfc1ddfb2')/$value
+sentinel_images/sentinel-image(a)_20-07-2017_05:27.png https://colhub.met.no/odata/v1/Products('94ee3c96-8ebf-4fd5-8209-ff4344f43ebe')/$value
+sentinel_images/sentinel-image(a)_20-07-2017_15:59.png https://colhub.met.no/odata/v1/Products('0068414f-f6b9-416a-adfb-48abcd07e817')/$value
+sentinel_images/sentinel-image(a)_21-07-2017_05:19.png https://colhub.met.no/odata/v1/Products('3d7a08de-ccc4-48a2-b1bc-12f03c0b7643')/$value
+sentinel_images/sentinel-image(a)_21-07-2017_15:50.png https://colhub.met.no/odata/v1/Products('4c322ec6-fbb8-4dd3-aced-71b6cd5baa3c')/$value
+sentinel_images/sentinel-image(a)_22-07-2017_05:10.png https://colhub.met.no/odata/v1/Products('7c0eb531-8db5-4654-8d87-09d54f1d0d92')/$value
+sentinel_images/sentinel-image(a)_22-07-2017_05:10.png https://colhub.met.no/odata/v1/Products('7c0eb531-8db5-4654-8d87-09d54f1d0d92')/$value
+sentinel_images/sentinel-image(a)_23-07-2017_15:34.png https://colhub.met.no/odata/v1/Products('c9e10852-92c3-4c24-9375-22d0f648c4c7')/$value
+sentinel_images/sentinel-image(a)_26-07-2017_05:27.png https://colhub.met.no/odata/v1/Products('ec3fe97a-748b-4db2-bd68-db9d79c8580f')/$value
+sentinel_images/sentinel-image(a)_27-07-2017_05:18.png https://colhub.met.no/odata/v1/Products('25f2154f-2b2e-4078-b7b5-d101446fa711')/$value
+sentinel_images/sentinel-image(a)_27-07-2017_15:51.png https://colhub.met.no/odata/v1/Products('30b07a62-7980-4e4d-ab04-36effd468c94')/$value
+sentinel_images/sentinel-image(a)_28-07-2017_05:11.png https://colhub.met.no/odata/v1/Products('31e933e2-7369-4963-a958-c4d437032dbe')/$value
+sentinel_images/sentinel-image(a)_28-07-2017_05:11.png https://colhub.met.no/odata/v1/Products('31e933e2-7369-4963-a958-c4d437032dbe')/$value
+sentinel_images/sentinel-image(a)_29-07-2017_15:35.png https://colhub.met.no/odata/v1/Products('992e4364-7f1f-4e65-b1f5-24ecacc6e773')/$value
