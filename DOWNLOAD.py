@@ -62,7 +62,7 @@ if (tempSize < maxSize):
     api.download(smallestFile)
     smallestName = api.get_product_odata(smallestFile)["title"]
     smallestDate = api.get_product_odata(smallestFile)["date"].strftime("%d-%m-%Y_%H:%M")
-
+    smallestLink = api.get_product_odata(smallestFile)["url"]
     print("Downloading " + smallestName + ", Size: " + str(tempSize) + " bytes.")
 else:
     print("No file small enough to download")
@@ -235,8 +235,15 @@ font = cv2.FONT_HERSHEY_COMPLEX
 cv2.putText(img,('Wind data from ' + obsName + ' observation site'),(10*p,20*p), font, 0.35*p,(0,0,255),p)
 cv2.putText(img,(str(obsSpeed)+" mps, from "+obsDir+". Observation time: "+obsTime+"."),(10*p,40*p),font,0.3*p,(0,0,255),p)
 
-cv2.imwrite('sentinel_images/sentinel-image(a)' + '_' + smallestDate + '.png', img)
+saveName = 'sentinel_images/sentinel-image(a)_' + smallestDate + '.png' # file name
+cv2.imwrite(saveName, img)
 print("Wind vector created and added to image!")
+
+################# ADDING PRODUCT DOWNLOAD LINK TO TEXT-FILE ################
+print("Appending to download_links txt-file...")
+txt_file = open("product_download_links.txt", "a")
+txt_file.write(saveName + ' ' + str(smallestLink) + "\n")
+txt_file.close()
 
 #################### DELETING USED FILES AND MAKING ZIP-FILE #################### (only works on linux OS)
 # deletes the used files

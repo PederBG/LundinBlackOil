@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+    
     <title>Sentinel-1 Data</title>
     <link rel="stylesheet" href="style/navbar.css" type="text/css">
     <link rel="stylesheet" href="style/sentinel.css" type="text/css">
@@ -12,17 +12,57 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="map.html">Maps</a></li>
+            <li><a onclick="openInfo()">Info</a></li>
             <li style="float:right"><a href="sentinel.html">Sentinel-1 Data</a></li>
         </ul>
     </div>
 <!-- ------------------ ------ ----------------- -->
-<a class="text" id="title">Sentinel-1 images from landing zone (under development)</a>
-<a class="text" id="link" href="sentinel_images.zip">Click here to download images in a zipped file</a>
-<p><a class="text" id="underText">Autonomous image downloading is running. New auto-generated image at 01 AM each day, marked with (a).</a></p>
+    <a class="text" id="title">Sentinel-1 images from landing zone (under development)</a>
+    <a class="text" id="link" href="sentinel_images.zip">Click here to download images in a zipped file</a>
+    <p><a class="text" id="underText">Autonomous image downloading is running. New auto-generated image added 8:00 AM and 8:00 PM (GMT), marked with (a).</a></p>
+    
 
-<div id="images">
+    <div id="fadeOut"></div>
+
+    <div id="infoBox">
+        <h2>Lundin Sentinel Image-Hub</h2>
+        <p>The hub contains Sentinel-1 images from Lundin's landing size in the Barents Sea. New images are generated twice a day. Satelite data are provided by The Copernicus Programme, directed by the European Commission.</p>
+        <p>By clicking on the Download-button under each image it is possible to download the original Sentinel data from Copernicus Colhub (MET NBS version) download site. Note that this data is password protected and requires a Colhub user. <a target="_blank" href="https://colhub.met.no/#/self-registration">Click here</a> to register a new Colhub account. Also note that these files can be very large and downloading raw data can therefore be time consuming.</p>
+        <div id="infoInner">
+            <p><b>Update interval: </b>New images generated twice a day, at 8:00 AM and 8:00 PM (GMT)</p>
+            <p><b>Landing site location: </b>72°04'02.8"N, 21°48'19.8"E - Area 25km east/west and 50km north</p>
+            <p><b>Landing site area: </b><a href="barentsSea.geojson">Click here</a> to view area in geojson format</p>
+            <p><b></b></p>
+            <p><b>Download source: </b>NBS Copernicus Data Hub</p>
+            <p><b>Data manipulation: </b>SNAP toolbox, developed by ESA (European Space Agency)</p>
+            <p><b>Manipulation operations: </b>Calibration, Subsetting, Speckle Filtering and Range Doppler Terrain Correction</p>
+            <p><b>Wind information: </b>yr.no - Goliat Platform observation site</p>
+            <p><b></b></p>
+        </div>
+    </div>
+    
+    <div id="images">
     <!-- Images are placed here -->
-</div>
+    </div>
+    
+<script type="text/javascript">
+    var infoBox = document.getElementById("infoBox");
+    var fadeOut= document.getElementById("fadeOut");
+
+
+    function openInfo(){
+        if (infoBox.style.display == "none"){
+	    infoBox.style.display = "block";
+	    //fadeOut.style.display = "block";
+
+	}
+	else{
+	    infoBox.style.display = "none";
+	    //fadeOut.style.display = "none";
+
+	}
+    }
+</script>
 
 <script type="text/javascript" src="scripts/sarData.js"></script>
 </body>

@@ -4,6 +4,7 @@
     padding: 0;
     overflow: hidden;
     background-color: #222;
+    z-index: 2;
 }
 
 @media (max-width: 90em) {
@@ -39,8 +40,10 @@ li:nth-child(1) a{
     margin-right: 0.2em;
 }
 
+
 #navbar li a:hover {
     background-color: #111;
+    cursor: pointer;
 }
 
 /* --------- SubMenu -------- */

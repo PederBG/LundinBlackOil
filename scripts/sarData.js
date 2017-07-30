@@ -6,22 +6,23 @@
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
-        var names = xhr.response;
-        names = names.split("<ul>")[1];
-        names = names.split("</ul>")[0];
-        names = names.split("</li>").slice(1);
+        var result = xhr.response;
+        result = result.split("\n");
 
-        var files = [];
-        for (var i = 0; i < names.length -1; i++){
-            files.push(names[i].split('"')[1]);
+	var names = [];
+	var links = [];
+        for (var i = 0; i < result.length -1; i++){
+            names.push(result[i].split(" ")[0]);
+            links.push(result[i].split(" ")[1]);
         }
 
 
-        console.log(files);
+        console.log(names);
+        console.log(links);
 
-
-        for (i in files) {
-            listFiles.push(files[i]);
+        for (i in names) {
+            console.log(names[i]);
+            listFiles.push(names[i]);
             var res = document.createElement("div");
             res.setAttribute("class", "responsive");
             document.getElementById("images").appendChild(res);
@@ -32,22 +33,27 @@ xhr.onreadystatechange = function() {
 
             var tar = document.createElement("a");
             tar.setAttribute("target", "_blank");
-            tar.setAttribute("href", "sentinel_images/"+ files[i]);
+            tar.setAttribute("href", names[i]);
             gal.appendChild(tar);
 
             var img = document.createElement("img");
-            img.setAttribute("src", "sentinel_images/" + files[i]);
+            img.setAttribute("src", names[i]);
             img.setAttribute("height", "200");
             img.setAttribute("width", "300");
             tar.appendChild(img);
 
             var desc = document.createElement("div");
             desc.setAttribute("class", "desc");
-            var temp = files[i].split('.png')[0];
-            desc.innerHTML = temp.split('./')[1];
+            var temp = names[i].split('.png')[0].split('sentinel_images/')[1];
+            if (links[i] != "NO_LINK"){
+                desc.innerHTML = temp + "<a href="+links[i]+">" + "<p>Download image</p>" + "</a>";
+            }
+            else {
+                desc.innerHTML = temp;
+            }
             gal.appendChild(desc)
         }
     }
 };
-xhr.open('GET', '/peder/sentinel_images', true);
+xhr.open('GET', '/peder/product_download_links.txt', true);
 xhr.send(null);

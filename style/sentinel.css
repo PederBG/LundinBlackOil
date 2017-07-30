@@ -1,3 +1,7 @@
+*{
+    text-decoration: none; /*fucking stubborn link underline... */
+}
+
 .text {
     position: absolute;
     width: 100%;
@@ -10,6 +14,8 @@
     margin-top: 70px;
     margin-bottom: 20px;
     font-size: medium;
+    width: 50%;
+    left: 25%;
 }
 
 #underText {
@@ -18,6 +24,64 @@
     font-size: small;
 }
 
+#infoButton{
+
+    cursor: pointer;
+}
+
+#fadeOut{
+    display: none;
+    opacity:0.5;
+    background-color:black;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:60px;
+    left:0px;
+    z-index:1;
+}
+
+#infoBox {
+    display: none;
+    position: fixed;
+    top: 12%;
+    left: 5%;
+    width: 90%;
+    height: 85%;
+    position: fixed;
+    background-color: DimGray;
+    color: whitesmoke;
+    text-align: left;
+    padding: 1%;
+    font-size: large;
+    font-family: Areal;
+    border-radius: 2%;
+    border: 2px solid  gray;
+    z-index: 2;
+    padding-left: 10%;
+}
+
+#infoBox h2 {
+    text-align: center;
+    padding-left: 0;
+}
+
+#infoInner{
+    text-align: left;
+    padding-left: 20%;
+}
+
+@media (max-width: 900px) {
+    #infoBox{
+        font-size: medium;
+    }
+}
+
+@media (max-width: 650px) {
+    #infoBox{
+        font-size: small;
+    }
+}
 #images {
     margin-top: 120px;
 }
@@ -26,8 +90,19 @@ img{
     max-height: 17em;
     min-height: 17em;
 }
-
-
+.desc p {
+    background-color: gray;
+    border-radius: 10%;
+    text-decoration: none;
+    color: whitesmoke;
+    margin: 5px 0 0 0;
+    padding: 0;
+}
+.desc p:hover {
+    background-color: darkgray;
+    text-decoration: none;
+    color: #B22222;
+}
 /* --------------- GALLERY ------------- */
 div.gallery {
     border: 1px solid #ccc;
