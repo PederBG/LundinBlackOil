@@ -3,12 +3,13 @@
     margin: 0;
     padding: 1px;
     overflow: hidden;
-    background-color: #333;
+    background-color: #222;
+    font-size: 1em;
 }
 
-@media (max-width: 100em) {
+@media (max-width: 30em) {
     #navbar ul {
-        font-size: 0.5em;
+        font-size: 1em;
     }
 }
 
@@ -20,15 +21,16 @@
 #navbar li a {
     display: block;
     text-align: center;
-    padding: 10px 16px;
+    padding: 15px 16px;
     text-decoration: none;
     color: white;
-    background-color: #222;
+    background-color: #333;
     border-radius: 10%;
 }
 
-#navbar li:nth-child(1) a{
+li:nth-child(2) a{
     cursor: pointer;
+    margin-right: 0.2em;
 }
 
 #navbar li a:hover {

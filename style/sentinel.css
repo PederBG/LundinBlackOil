@@ -2,6 +2,24 @@
     text-decoration: none; /*fucking stubborn link underline... */
 }
 
+html{
+    background-color:  #f2f2f2;
+}
+
+#navbar {
+    position: relative;
+    z-index: 2;
+}
+
+#title{
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-weight: bold;
+    color: #23445c;
+    background-color: #f5f6f5;
+    border-radius: 80%;
+    font-size: 2.5em;
+}
+
 .text {
     position: absolute;
     width: 100%;
@@ -11,15 +29,26 @@
 }
 
 #link {
-    margin-top: 70px;
+    margin-top: 80px;
     margin-bottom: 20px;
     font-size: medium;
-    width: 50%;
-    left: 25%;
+    width: 30%;
+    left: 35%;
+    background-color: gray;
+    border-radius: 30%;
+    text-decoration: none;
+    color: whitesmoke;
+    padding: 3px 0 3px 0;
+    border: solid 0.5px #70888b;
+}
+#link:hover{
+    background-color: darkgray;
+    color: #B22222;
+    padding: 4px 0 4px 0;
 }
 
 #underText {
-    margin-top: 85px;
+    margin-top: 105px;
     margin-bottom: 20px;
     font-size: small;
 }
@@ -36,29 +65,54 @@
     position:fixed;
     width:100%;
     height:100%;
-    top:60px;
+    top: 0px;
     left:0px;
-    z-index:1;
+    z-index: 1;
 }
 
 #infoBox {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 12%;
     left: 5%;
     width: 90%;
-    height: 85%;
-    position: fixed;
-    background-color: DimGray;
-    color: whitesmoke;
+    background-color: #4d4d4d;
+    color: #e6e6e6;
     text-align: left;
     padding: 1%;
-    font-size: large;
+    font-size: medium;
     font-family: Areal;
     border-radius: 2%;
-    border: 2px solid  gray;
+    border: 1px solid  #752424;
     z-index: 2;
-    padding-left: 10%;
+    padding-left: 3%;
+    min-height: 80%;
+}
+@media (max-width: 90em) {
+    #infoBox{
+        font-size: x-large;
+    }
+}
+
+#infoBox:link, #infoBox: visited{
+    color: #8B0000;
+}
+
+#close {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    color: #f1f1f1;
+    font-size: 60px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#close:hover,
+#close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #infoBox h2 {
@@ -68,7 +122,8 @@
 
 #infoInner{
     text-align: left;
-    padding-left: 20%;
+    padding-left: 10%;
+    margin-bottom: 80px;
 }
 
 @media (max-width: 900px) {
@@ -82,8 +137,43 @@
         font-size: small;
     }
 }
+
+/* Logo Banner */
+.logos{
+    min-height: 60px;
+    max-height: 60px;
+    bottom: 10px;
+    position: absolute;
+    background-image: url("../images/lundinv23.gif");    
+}
+.logos:hover{
+    opacity: 0.8;
+}
+
+#logoOne{
+    background-image: url("../images/lundinv23.gif");    
+    width: 150px;
+    margin-left: -25px;
+}
+#logoTwo{
+    background-image: url("../images/esa.png");    
+    margin-left: 150px;
+    width: 136px;
+}
+#logoThree{
+    background-image: url("../images/copernicus.png");    
+    margin-left: 320px;
+    width: 165px;
+}
+#logoFour{
+    background-image: url("../images/yr.png");    
+    margin-left: 520px;
+    width: 60px;
+}
+
+/* IMAGES */
 #images {
-    margin-top: 120px;
+    margin-top: 145px;
 }
 
 img{
@@ -92,24 +182,29 @@ img{
 }
 .desc p {
     background-color: gray;
-    border-radius: 10%;
+    border-radius: 15%;
     text-decoration: none;
     color: whitesmoke;
     margin: 5px 0 0 0;
     padding: 0;
+    border: solid 0.5px #70888b;
 }
 .desc p:hover {
     background-color: darkgray;
     text-decoration: none;
     color: #B22222;
 }
+
 /* --------------- GALLERY ------------- */
 div.gallery {
     border: 1px solid #ccc;
+    z-index: -2;
+    background-color: #d9d9d9;
 }
 
 div.gallery:hover {
     border: 1px solid #777;
+    opacity: 0.9;
 }
 
 div.gallery img {

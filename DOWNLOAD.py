@@ -57,7 +57,7 @@ for i in range(0, len(products)):
         smallestFile = products_df.index[i]
         tempSize = api.get_product_odata(products_df.index[i])["size"]
 
-maxSize = 300000000  # Set the max size for files to download (in bytes)
+maxSize = 500000000  # Set the max size for files to download (in bytes)
 if (tempSize < maxSize):
     api.download(smallestFile)
     smallestName = api.get_product_odata(smallestFile)["title"]
@@ -238,6 +238,13 @@ cv2.putText(img,(str(obsSpeed)+" mps, from "+obsDir+". Observation time: "+obsTi
 saveName = 'sentinel_images/sentinel-image(a)_' + smallestDate + '.png' # file name
 cv2.imwrite(saveName, img)
 print("Wind vector created and added to image!")
+
+################# RESIZE AND MAKE THUMBNAIL ################
+resizeInput = cv2.imread(saveName)
+height, width = img.shape[:2]
+resized = cv2.resize(resizeInput,(int(0.05*width), int(0.05*height)), interpolation = cv2.INTER_CUBIC)
+cv2.imwrite("sentinel_images/sentinel-image(a)_" + smallestDate + "(R).png", resized)
+print("Thumbnail image created!")
 
 ################# ADDING PRODUCT DOWNLOAD LINK TO TEXT-FILE ################
 print("Appending to download_links txt-file...")

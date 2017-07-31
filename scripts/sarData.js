@@ -37,7 +37,7 @@ xhr.onreadystatechange = function() {
             gal.appendChild(tar);
 
             var img = document.createElement("img");
-            img.setAttribute("src", names[i]);
+            img.setAttribute("src", names[i].split(".png")[0] + "(R).png");
             img.setAttribute("height", "200");
             img.setAttribute("width", "300");
             tar.appendChild(img);
@@ -46,7 +46,7 @@ xhr.onreadystatechange = function() {
             desc.setAttribute("class", "desc");
             var temp = names[i].split('.png')[0].split('sentinel_images/')[1];
             if (links[i] != "NO_LINK"){
-                desc.innerHTML = temp + "<a href="+links[i]+">" + "<p>Download image</p>" + "</a>";
+                desc.innerHTML = temp + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
             }
             else {
                 desc.innerHTML = temp;
