@@ -138,13 +138,12 @@ html{
     }
 }
 
-/* Logo Banner */
+/* ----------- Logo Banner ----------- */
 .logos{
     min-height: 60px;
     max-height: 60px;
     bottom: 10px;
     position: absolute;
-    background-image: url("../images/lundinv23.gif");    
 }
 .logos:hover{
     opacity: 0.8;
@@ -169,6 +168,13 @@ html{
     background-image: url("../images/yr.png");    
     margin-left: 520px;
     width: 60px;
+}
+#logoFive{
+    right: 20px;
+    bottom: 10px;
+    position: absolute;
+    font-size: small;
+    color: #892a2a ;
 }
 
 /* IMAGES */

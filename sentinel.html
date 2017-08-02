@@ -28,23 +28,28 @@
         <span id="close" onclick="openInfo()").style.display='none'">&times;</span>
 
         <h2>About the hub:</h2>
-        <p>The hub contains Sentinel-1 backscatter images from Lundin's landing site in the Barents Sea. New images are generated at 11:00 PM (GMT) each day. Note that some days the Sentinel-1 satelites does not orbit over the ladning area and therefore no image will be added. Satelite data are provided by The Copernicus Programme, directed by the European Commission.</p>
+        <p>The hub contains Sentinel-1 backscatter images from Lundin's landing site in the Barents Sea. New images are generated at 11:00 PM (GMT) each day. Note that some days the Sentinel-1 satelites does not orbit over the ladning area and therefore no image will be added. <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-1/satellite-description/geographical-coverage" style="color:IndianRed">Click here</a> for detailed information about the orbit cycle. Satelite data are provided by The Copernicus Programme, directed by the European Commission.</p>
         <p>By clicking on the Download-button under each image it is possible to download the original Sentinel data from Copernicus Colhub (MET NBS version) download site. Note that this data is password protected and requires a Colhub user. <a target="_blank" href="https://colhub.met.no/#/self-registration" style="color:IndianRed">Click here</a> to register a new Colhub account. Also note that these files can be very large and downloading raw data can therefore be time consuming. It is also possible to download all listed images in a compressed directory.</p>
         <div id="infoInner">
             <p><b>Update interval: </b>New images generated once a day, at 11:00 PM (GMT)</p>
-            <p><b>Landing site location: </b>72°04'02.8"N, 21°48'19.8"E - Area 25km east/west and 50km north</p>
+            <p><b>Landing site: </b>Square with 50 km sides, center grid: 72&deg;17'32''N, 21&deg;48'20''E</p>
             <p><b>Landing site area: </b><a href="http://bl.ocks.org/anonymous/raw/c55b978710421adec51912277a04f7b8/" style="color:IndianRed">Click here</a> to view area in geojson format</p>
-            <p><b></b></p>
+            <p><b>Satelites: </b>Sentinel-A and Sentinel-1B</p>
+            <p><b>Instrument: </b>Synthetic Aperture Radar with C-band (SAR-C)</p>
+            <p><b>Sensor mode: </b>Interferometric Wide Swath (IW)</p>
+            <p><b>Polarization: </b>Vertical transmit and Vertical receive (VV)</p>
             <p><b>Download source: </b>NBS Copernicus Data Hub</p>
+            <p><b>Raw data format: </b>SENTINEL-SAFE format (.SAFE)</p>
             <p><b>Data manipulation: </b>SNAP toolbox, developed by ESA (European Space Agency)</p>
             <p><b>Manipulation operations: </b>Calibration, Subsetting, Speckle Filtering and Range Doppler Terrain Correction</p>
-            <p><b>Wind information: </b>yr.no - Goliat Platform observation site</p>
+            <p><b>Wind information: </b>Grid based ocean forecast from yr.no</p>
             <p><b></b></p>
         </div>
         <div class="logos" id="logoOne" style="cursor: pointer;" onclick="window.open('https://www.lundin-norway.no/?lang=en', '_blank');"></div>
         <div class="logos" id="logoTwo" style="cursor: pointer;" onclick="window.open('http://www.esa.int/ESA', '_blank');"></div>
         <div class="logos" id="logoThree" style="cursor: pointer;" onclick="window.open('http://www.copernicus.eu/', '_blank');"></div>
-        <div class="logos" id="logoFour" style="cursor: pointer;" onclick="window.open('https://www.yr.no/place/Norway/Hav/Goliat_observation_site/', '_blank');"></div>
+        <div class="logos" id="logoFour" style="cursor: pointer;" onclick="window.open('https://www.yr.no/place/Hav/72.2922222_21.8055556/', '_blank');"></div>
+        <div id="logoFive" style="cursor: pointer;" onclick="window.open('https://img.buzzfeed.com/buzzfeed-static/static/2014-09/18/14/enhanced/webdr08/anigif_enhanced-15063-1411066066-1.gif', '_blank');">Grundvold Consulting</div>
     </div>
     
     

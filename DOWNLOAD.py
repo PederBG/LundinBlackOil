@@ -154,30 +154,24 @@ imageIO.write(image, 'PNG', name)
 print("Image created")
 
 
-################### MAKING WIND ARROW ####################
+################### GETTING WIND INFORMATION ####################
 # CONNECT TO YR.NO
 print("Connecting to yr.no...")
 import urllib2
-response = urllib2.urlopen('https://www.yr.no/place/Norway/Hav/Goliat_observation_site/varsel.xml')
+
+GRID = '72.2922222_21.8055556' # LANDING SITE GRID (center of square)
+splitGrid = GRID.split('_')
+response = urllib2.urlopen('https://www.yr.no/place/Hav/' + GRID + '/varsel.xml')
 html = response.read()  # Observations from Goliat platform
 
 import xml.etree.ElementTree as ET
 tree = ET.ElementTree(ET.fromstring(html))
 root = tree.getroot()
 
-try:
-    obsSpeed = float(root[6][0][3].get('mps'))
-    obsDeg = float(root[6][0][2].get('deg'))
-    obsName = root[6][0].get('name')
-    obsDir = root[6][0][2].get('name')
-    obsTime = root[6][0][2].get('time')
-except Exception:
-    print ("Goliat Platform weather observations, not available, using Fruholmen")
-    obsSpeed = float(root[6][0][3].get('mps'))
-    obsDeg = float(root[6][0][2].get('deg'))
-    obsName = root[6][0].get('name')
-    obsDir = root[6][0][2].get('name')
-    obsTime = root[6][0][2].get('time')
+obsSpeed = float(root[5][0][0][3].get('mps'))
+obsDeg = float(root[5][0][0][2].get('deg'))
+obsName = root[0][3].get('geobaseid')
+obsDir = root[5][0][0][2].get('name')
 
 print("Wind: ", obsSpeed, " mps, direction: ", obsDeg, "degrees.")
 
@@ -204,10 +198,10 @@ print("Computed P-ratio: ", p)
 # LINE LENGTH CONTROL
 lineSpeed = obsSpeed
 lineSize = 2
-if (lineSpeed > 28):
+if (lineSpeed > 25):
     lineSize = 4
     lineSpeed = lineSpeed / 8
-elif (lineSpeed > 12):
+elif (lineSpeed > 10):
     lineSize = 3
     lineSpeed = lineSpeed/3
 
@@ -232,14 +226,14 @@ print("X: ", x, ", Y: ", y)
 
 draw = cv2.arrowedLine(img, (int(startX)*p, int(startY)*p), (int(x)*p,int(y)*p), (0,0,255), lineSize*p)
 font = cv2.FONT_HERSHEY_COMPLEX
-cv2.putText(img,('Wind data from ' + obsName + ' observation site'),(10*p,20*p), font, 0.35*p,(0,0,255),p)
-cv2.putText(img,(str(obsSpeed)+" mps, from "+obsDir+". Observation time: "+obsTime+"."),(10*p,40*p),font,0.3*p,(0,0,255),p)
+cv2.putText(img,('Wind data from grid: ' + splitGrid[0]+'N, ' + splitGrid[1]+'E'),(10*p,20*p), font, 0.3*p,(0,0,255),p)
+cv2.putText(img,(str(obsSpeed)+" mps, from "+obsDir),(10*p,40*p),font,0.3*p,(0,0,255),p)
 
 saveName = 'sentinel_images/sentinel-image(a)_' + smallestDate + '.png' # file name
 cv2.imwrite(saveName, img)
 print("Wind vector created and added to image!")
 
-################# RESIZE AND MAKE THUMBNAIL ################
+################# RESIZE AND MAKEING THUMBNAIL ################
 resizeInput = cv2.imread(saveName)
 height, width = img.shape[:2]
 resized = cv2.resize(resizeInput,(int(0.05*width), int(0.05*height)), interpolation = cv2.INTER_CUBIC)
