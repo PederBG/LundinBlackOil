@@ -20,3 +20,4 @@ sentinel_images/sentinel-image(a)_04-08-2017_15-34.png https://colhub.met.no/oda
 sentinel_images/sentinel-image(a)_07-08-2017_15-59.png https://colhub.met.no/odata/v1/Products('185db879-ce69-441c-a1c4-3a313729d63b')/$value
 sentinel_images/sentinel-image(a)_08-08-2017_05-18.png https://colhub.met.no/odata/v1/Products('26095e27-322b-4291-a11a-acb7e5e50120')/$value
 sentinel_images/sentinel-image(a)_09-08-2017_05-11.png https://colhub.met.no/odata/v1/Products('03d3f2ed-42bd-427d-8781-2fdb56025af1')/$value
+sentinel_images/sentinel-image(a)_09-08-2017_15-42.png https://colhub.met.no/odata/v1/Products('6c07d7ac-8d9e-433a-8b61-5eea1b055639')/$value

@@ -140,7 +140,7 @@ ProductIO.writeProduct(target_1, "temp2", 'BEAM-DIMAP')
 productFILT = ProductIO.readProduct('temp2.dim')
 # ----------------------------------------------------------------
 
-# TERRAIN CORRECTION
+# TERRAIN CORRECTION TODO: Change to Ellipsoid Correction GG/RD (?)
 print("Range Doppler Terrain Correction...")
 params2 = HashMap()
 params2.put('demName', 'ACE30')
@@ -291,7 +291,7 @@ txt_file.write(
     '<Document>' + "\n" +
     '  <name>' + fileName + '</name>' + "\n" +
     '  <description>' + "\n" +
-    'subTEST_TC</description>' + "\n" +
+    'TODO</description>' + "\n" +
     '  <GroundOverlay>' + "\n" +
     '    <name>Raster data</name>' + "\n" +
     '      <LatLonBox>' + "\n" +
@@ -315,6 +315,35 @@ for dirname, subdirs, files in os.walk('kmzfiles/' + dirName):
     for filename in files:
         zf.write(os.path.join(dirname, filename))
 zf.close()
+
+
+# MAKING KML TO OVERLAY IN MAP.HTML
+print("Making KML to overlay in Map.html...")
+
+txt_file = open('kmlfiles/' + fileName + ".kml", "w")
+txt_file.write(
+    '<?xml version="1.0" encoding="UTF-8"?>' + "\n" +
+    '<kml xmlns="http://earth.google.com/kml/2.0">' + "\n" +
+    '<Document>' + "\n" +
+    '  <name>' + fileName + '</name>' + "\n" +
+    '  <description>' + "\n" +
+    'TODOC</description>' + "\n" +
+    '  <GroundOverlay>' + "\n" +
+    '    <name>Raster data</name>' + "\n" +
+    '      <LatLonBox>' + "\n" +
+    '      <north>' + str(boundNorth) + '</north>' + "\n" +
+    '      <south>' + str(boundSouth) + '</south>' + "\n" +
+    '      <east>' + str(boundEast) + '</east>' + "\n" +
+    '      <west>' + str(boundWest) + '</west>' + "\n" +
+    '    </LatLonBox>' + "\n" +
+    '    <Icon>' + "\n" +
+    '      <href>http://lundinblackoil.com/peder/sentinel_images/' + fileName + '(R).png</href>' + "\n" +
+    '    </Icon>' + "\n" +
+    '  </GroundOverlay>' + "\n" +
+    '</Document>' + "\n" +
+    '</kml>'
+)
+txt_file.close()
 
 # -------------------------------------------------------------------------------------------
 
