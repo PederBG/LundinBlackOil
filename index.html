@@ -12,13 +12,15 @@
             <div id="links">
                 <a class="button" href="sentinel.html">Sentinel-1 Data</a><br>
                 <a class="button" href="S1A.html">Satellite Tracker</a><br>
-                <a class="button" href="map.html">Map</a>
+                <a class="button" onclick="showMapWithKmlURL()" style="cursor: pointer">Map</a>
+
             </div>
         </div>
     </body>
     <script type="text/javascript">
-        function notYetMade(site) {
-            alert(site + " is under development.")
+        function showMapWithKmlURL(){
+            localStorage.setItem("kmlURL", null);
+            window.open('map.html', "_self");
         }
     </script>
 

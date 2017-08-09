@@ -30,7 +30,7 @@
     <!-- ------------------ NavBar ----------------- -->
     <div id="navbar">
         <ul>
-            <li><a onclick="showOptions()">Options</a></li>
+            <li><a onclick="showOptions()" style="cursor: pointer">Options</a></li>
             <li style="float:right"><a onclick="showSubMenu()">Maps</a></li>
                 <div id="subMenu">
                     <li style="float:right"><a id="subMenu4" style="color:beige" onclick="focusWaterMap()">Focus Water</a></li>
@@ -82,12 +82,19 @@
     <div id="map"></div>
     <script>
         var map;
+        var kmlURL = localStorage.getItem("kmlURL");
+        console.log(kmlURL);
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 64.397, lng: 7.644},
                 zoom: 4
             });
-        }
+        var ctaLayer = new google.maps.KmlLayer({
+              url: kmlURL,
+              map: map
+        });
+      }
+        
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLqi7VCFRa7voVGflNyUXyhyL8OgqIQ68&callback=initMap&libraries=geometry"></script>
     <script src="scripts/map.js"></script>

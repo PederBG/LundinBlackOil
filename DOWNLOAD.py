@@ -1,21 +1,22 @@
 #!/bin/sh
 ''''cd /home/lundinbl/public_html/peder/ && exec /home/lundinbl/Python27_v2/Python-2.7.13/python  -- "$0" # '''
 
+import sys
+sys.path.append("/home/lundinbl/.local/lib/python2.7/site-packages/snappy")
+sys.path.append("/home/lundinbl/.local/lib/python2.7/site-packages/jpy")
+
 import time
 import os
-import sys
 from sentinelsat.sentinel import SentinelAPI, read_geojson, geojson_to_wkt
 import zipfile
 import snappy
-from snappy import ProductIO, GPF, ProgressMonitor
+from snappy import ProductIO, GPF, ProgressMonitor, PixelGeoCoding, PixelPos, GeoPos
 import urllib2
 import xml.etree.ElementTree as ET
 import cv2
 import math
 import shutil
 # ----------------------------------------------------------------
-sys.path.append("/home/lundinbl/.local/lib/python2.7/site-packages/snappy")
-sys.path.append("/home/lundinbl/.local/lib/python2.7/site-packages/jpy")
 
 # WRITING TO LOG FILE
 class Tee(object):
@@ -111,7 +112,7 @@ params0.put('outputImageScaleInDb', False)
 calib = GPF.createProduct("Calibration", params0, product)
 # ----------------------------------------------------------------
 
-# MAKING SUBSET
+# MAKING SUBSET (TODO?: Change to SubsetOp() )
 print("Making subset...")
 WKTReader = snappy.jpy.get_type('com.vividsolutions.jts.io.WKTReader')
 wkt = geojson_to_wkt(read_geojson('veryBigBarentsSea.geojson'))  # Lundin landing site in Barents Sea
@@ -144,8 +145,9 @@ print("Range Doppler Terrain Correction...")
 params2 = HashMap()
 params2.put('demName', 'ACE30')
 params2.put('nodataValueAtSea', False)
+params2.put('saveLatLon', True)
 target_2 = GPF.createProduct('Terrain-Correction', params2, productFILT)
-ProductIO.writeProduct(target_1, "temp3", 'BEAM-DIMAP')
+ProductIO.writeProduct(target_2, "temp3", 'BEAM-DIMAP')
 
 # Reading in new product
 productTER = ProductIO.readProduct('temp3.dim')
@@ -250,16 +252,77 @@ cv2.putText(img, ('Wind data from grid: ' + splitGrid[0] + 'N, ' + splitGrid[1] 
             (0, 0, 255), p)
 cv2.putText(img, (str(obsSpeed) + " mps, from " + obsDir), (10 * p, 40 * p), font, 0.3 * p, (0, 0, 255), p)
 
-saveName = 'sentinel_images/sentinel-image(a)2_' + smallestDate + '.png'  # file name
+fileName = 'sentinel-image(a)_' + smallestDate
+saveName = 'sentinel_images/' + fileName + '.png'  # file name
+
 cv2.imwrite(saveName, img)
 print("Wind vector created and added to image!")
+# -------------------------------------------------------------------------------------------
+
+################### MAKING KMZ FILE FOR USE IN GOOGLE EARTH ####################
+print ("Making KMZ file...")
+dirName = fileName
+os.makedirs('kmzfiles/' + dirName)
+
+kmz_saveName = 'kmzfiles/' + dirName + '/' + fileName + '.png'
+cv2.imwrite(kmz_saveName, img)
+
+
+band_lat = target_2.getBand('latitude')
+band_long = target_2.getBand('longitude')
+
+group = PixelGeoCoding(band_lat, band_long, None, 5)  # TODO: Check last parameter (is 5 optimal?)
+
+imHeight = band_lat.getRasterHeight()
+imWidth = band_lat.getRasterWidth()
+
+boundNorth = group.getGeoPos(PixelPos(imWidth, 0), GeoPos()).getLat()
+boundWest = group.getGeoPos(PixelPos(0, imHeight), GeoPos()).getLon()
+boundEast = group.getGeoPos(PixelPos(imWidth, imHeight), GeoPos()).getLon()
+boundSouth = group.getGeoPos(PixelPos(imWidth, imHeight), GeoPos()).getLat()
+
+print boundNorth, boundWest, boundEast, boundSouth
+
+print "Writing KML file..."  # TODO: Make legend (bar that shows backscatter color scale)
+txt_file = open('kmzfiles/' + dirName + "/doc.kml", "w")
+txt_file.write(
+    '<?xml version="1.0" encoding="UTF-8"?>' + "\n" +
+    '<kml xmlns="http://earth.google.com/kml/2.0">' + "\n" +
+    '<Document>' + "\n" +
+    '  <name>' + fileName + '</name>' + "\n" +
+    '  <description>' + "\n" +
+    'subTEST_TC</description>' + "\n" +
+    '  <GroundOverlay>' + "\n" +
+    '    <name>Raster data</name>' + "\n" +
+    '      <LatLonBox>' + "\n" +
+    '      <north>' + str(boundNorth) + '</north>' + "\n" +
+    '      <south>' + str(boundSouth) + '</south>' + "\n" +
+    '      <east>' + str(boundEast) + '</east>' + "\n" +
+    '      <west>' + str(boundWest) + '</west>' + "\n" +
+    '    </LatLonBox>' + "\n" +
+    '    <Icon>' + "\n" +
+    '      <href>' + fileName + '.png</href>' + "\n" +
+    '    </Icon>' + "\n" +
+    '  </GroundOverlay>' + "\n" +
+    '</Document>' + "\n" +
+    '</kml>'
+)
+txt_file.close()
+
+zf = zipfile.ZipFile('kmzfiles/' + dirName + ".zip", "w")
+for dirname, subdirs, files in os.walk('kmzfiles/' + dirName):
+    zf.write(dirname)
+    for filename in files:
+        zf.write(os.path.join(dirname, filename))
+zf.close()
+
 # -------------------------------------------------------------------------------------------
 
 ################# RESIZE AND MAKEING THUMBNAIL ################
 resizeInput = cv2.imread(saveName)
 height, width = img.shape[:2]
 resized = cv2.resize(resizeInput, (int(0.05 * width), int(0.05 * height)), interpolation=cv2.INTER_CUBIC)
-cv2.imwrite("sentinel_images/sentinel-image(a)2_" + smallestDate + "(R).png", resized)
+cv2.imwrite("sentinel_images/" + fileName + "(R).png", resized)
 print("Thumbnail image created!")
 # -------------------------------------------------------------------------------------------
 
@@ -282,6 +345,7 @@ shutil.rmtree(smallestName + '.SAFE')
 shutil.rmtree('temp.data')
 shutil.rmtree('temp2.data')
 shutil.rmtree('temp3.data')
+shutil.rmtree('kmzfiles/' + dirName)
 # -------------------------------------------------------------------------------------------
 
 # COMPRESSING TO ENABLE DIRECT DOWNLOAD

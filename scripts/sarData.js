@@ -45,8 +45,9 @@ xhr.onreadystatechange = function() {
             var desc = document.createElement("div");
             desc.setAttribute("class", "desc");
             var temp = names[i].split('.png')[0].split('sentinel_images/')[1];
+            var kmlURL = "http://lundinblackoil.com/peder/kmlfiles/" + names[i]
             if (links[i] != "NO_LINK"){
-                desc.innerHTML = temp + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
+                desc.innerHTML = temp + "<a id=" + temp + " onclick='showMapWithKmlURL(this)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
             }
             else {
                 desc.innerHTML = temp;
@@ -57,3 +58,9 @@ xhr.onreadystatechange = function() {
 };
 xhr.open('GET', '/peder/product_download_links.txt', true);
 xhr.send(null);
+
+
+function showMapWithKmlURL(e){
+    localStorage.setItem("kmlURL", "http://lundinblackoil.com/peder/kmlfiles/" + e.id + ".kml");
+    window.open('map.html', "_self");
+}
