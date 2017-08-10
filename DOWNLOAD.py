@@ -280,8 +280,8 @@ print boundNorth, boundWest, boundEast, boundSouth
 
 
 # TODO: KMZ generating on hold since I dont know how to show them directly
-"""
 dirName = fileName
+"""
 os.makedirs('kmzfiles/' + dirName)
 
 kmz_saveName = 'kmzfiles/' + dirName + '/' + fileName + '.png'
@@ -378,7 +378,7 @@ shutil.rmtree(smallestName + '.SAFE')
 shutil.rmtree('temp.data')
 shutil.rmtree('temp2.data')
 shutil.rmtree('temp3.data')
-shutil.rmtree('kmzfiles/' + dirName)
+# shutil.rmtree('kmzfiles/' + dirName) # KMZ file generating on hold...
 # -------------------------------------------------------------------------------------------
 
 # COMPRESSING TO ENABLE DIRECT DOWNLOAD

@@ -74,13 +74,16 @@ function showMapWithKmlURL(e){
 function togglePopup(e){
     if (e.parentNode.parentNode.children[1].style.display == 'block'){
         e.parentNode.parentNode.children[1].style.display = 'none';
+        e.parentNode.style.opacity = '1';
     }
     else {
         var selects = document.getElementsByClassName('popup');
         for(var i = 0; i < selects.length; i++){
             selects[i].style.display = 'none';
+            selects[i].parentNode.firstChild.style.opacity= '1';
         }
         e.parentNode.parentNode.children[1].style.display = 'block';
+        e.parentNode.style.opacity = '0.8';
     }
 }
 
@@ -91,6 +94,7 @@ document.addEventListener("click", function(e){
         var selects = document.getElementsByClassName('popup');
         for(var i = 0; i < selects.length; i++){
             selects[i].style.display = 'none';
+            selects[i].parentNode.firstChild.style.opacity= '1';
         }
     }
 });

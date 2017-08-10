@@ -249,16 +249,16 @@ div.desc {
 
 /* --------------- Images Popup ------------- */
 .popup {
-    top: 10%;
+    top: 5%;
     left: 5%;
     width: 90%;
-    height: 60%;
-    background-color: rgba(123, 100, 100, 0.8);
+    height: 69%;
+    background-color: rgba(223, 217, 217, 0.7);
     z-index: 1;
     position: absolute;
-    border: solid 2px gray;
     border-radius: 10%;
     display: none;
+    border: 0.5px solid gray;
 }
 
 .popup p {
@@ -266,20 +266,22 @@ div.desc {
     border-radius: 15%;
     text-decoration: none;
     color: whitesmoke;
-    margin: 8% 0 0 0;
-    padding: 5px 0 5px 0;
+    margin: 10% 0 0 0;
+    padding: 7.5px 0 7.5px 0;
     border: solid 0.5px #70888b;
     z-index: 3;
     text-align: center;
 }
 
 .popup_first p{
-    margin: 10% 0 0 0;
+    margin: 8% 0 0 0;
 }
+
 .popup p:hover {
     background-color: darkgray;
     text-decoration: none;
     color: #B22222;
+    padding: 8px 0 8px 0;
 }
 /* ----------------------------------- */
 
