@@ -32,10 +32,9 @@ xhr.onreadystatechange = function() {
             res.appendChild(gal);
 
             var tar = document.createElement("a");
-            tar.setAttribute("target", "_blank");
-            tar.setAttribute("href", names[i]);
+            tar.setAttribute("onclick", "togglePopup(this)");
             gal.appendChild(tar);
-
+            
             var img = document.createElement("img");
             img.setAttribute("src", names[i].split(".png")[0] + "(R).png");
             img.setAttribute("height", "200");
@@ -52,13 +51,14 @@ xhr.onreadystatechange = function() {
             else {
                 tempName = temp;
             }
-            if (links[i] != "NO_LINK"){
-                desc.innerHTML = tempName + "<a id=" + temp + " onclick='showMapWithKmlURL(this)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
-            }
-            else {
-                desc.innerHTML = temp;
-            }
+            desc.innerHTML = tempName;
             gal.appendChild(desc)
+            
+            var popup = document.createElement("div");
+            popup.setAttribute("class", "popup");
+            res.appendChild(popup);
+            
+            popup.innerHTML = "<a href=" + names[i] + " class='popup_first'><p>View Image</p></a><a id=" + temp + " onclick='showMapWithKmlURL(this)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
         }
     }
 };
@@ -70,3 +70,28 @@ function showMapWithKmlURL(e){
     localStorage.setItem("kmlURL", "http://lundinblackoil.com/peder/kmlfiles/" + e.id + ".kml");
     window.open('map.html', "_self");
 }
+
+function togglePopup(e){
+    if (e.parentNode.parentNode.children[1].style.display == 'block'){
+        e.parentNode.parentNode.children[1].style.display = 'none';
+    }
+    else {
+        var selects = document.getElementsByClassName('popup');
+        for(var i = 0; i < selects.length; i++){
+            selects[i].style.display = 'none';
+        }
+        e.parentNode.parentNode.children[1].style.display = 'block';
+    }
+}
+
+
+document.addEventListener("click", function(e){
+    console.log(e.target.tagName);
+    if (e.target.tagName == 'HTML' || e.target.tagName == 'A' || e.target.tagName == 'UL'){
+        var selects = document.getElementsByClassName('popup');
+        for(var i = 0; i < selects.length; i++){
+            selects[i].style.display = 'none';
+        }
+    }
+});
+

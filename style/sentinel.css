@@ -185,20 +185,7 @@ html{
 img{
     max-height: 17em;
     min-height: 17em;
-}
-.desc p {
-    background-color: gray;
-    border-radius: 15%;
-    text-decoration: none;
-    color: whitesmoke;
-    margin: 5px 0 0 0;
-    padding: 0;
-    border: solid 0.5px #70888b;
-}
-.desc p:hover {
-    background-color: darkgray;
-    text-decoration: none;
-    color: #B22222;
+    cursor: pointer;
 }
 
 /* --------------- GALLERY ------------- */
@@ -231,6 +218,7 @@ div.desc {
     padding: 0 6px;
     float: left;
     width: 24.99999%;
+    position: relative;
 }
 
 @media only screen and (max-width: 700px){
@@ -251,4 +239,47 @@ div.desc {
     display: table;
     clear: both;
 }
+
+.gallery{
+    /*position: relative;  Used to place popup inside gallery div */
+}
+
+.gallery a{
+}
+
+/* --------------- Images Popup ------------- */
+.popup {
+    top: 10%;
+    left: 5%;
+    width: 90%;
+    height: 60%;
+    background-color: rgba(123, 100, 100, 0.8);
+    z-index: 1;
+    position: absolute;
+    border: solid 2px gray;
+    border-radius: 10%;
+    display: none;
+}
+
+.popup p {
+    background-color: gray;
+    border-radius: 15%;
+    text-decoration: none;
+    color: whitesmoke;
+    margin: 8% 0 0 0;
+    padding: 5px 0 5px 0;
+    border: solid 0.5px #70888b;
+    z-index: 3;
+    text-align: center;
+}
+
+.popup_first p{
+    margin: 10% 0 0 0;
+}
+.popup p:hover {
+    background-color: darkgray;
+    text-decoration: none;
+    color: #B22222;
+}
+/* ----------------------------------- */
 
