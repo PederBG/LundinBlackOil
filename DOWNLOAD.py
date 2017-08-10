@@ -76,7 +76,7 @@ maxSize = 500000000  # Set the max size for files to download (in bytes)
 if (tempSize < maxSize):
     api.download(smallestFile)
     smallestName = api.get_product_odata(smallestFile)["title"]
-    smallestDate = api.get_product_odata(smallestFile)["date"].strftime("%d-%m-%Y_%H-%M") # ":" cause error in windowsOS
+    smallestDate = api.get_product_odata(smallestFile)["date"].strftime("%d-%m-%Y_%H-%M") # ":" cause error in windowsOS and with KML links
     smallestLink = api.get_product_odata(smallestFile)["url"]
     print("Downloading " + smallestName + ", Size: " + str(tempSize) + " bytes.")
 else:
@@ -259,13 +259,8 @@ cv2.imwrite(saveName, img)
 print("Wind vector created and added to image!")
 # -------------------------------------------------------------------------------------------
 
-################### MAKING KMZ FILE FOR USE IN GOOGLE EARTH ####################
-print ("Making KMZ file...")
-dirName = fileName
-os.makedirs('kmzfiles/' + dirName)
-
-kmz_saveName = 'kmzfiles/' + dirName + '/' + fileName + '.png'
-cv2.imwrite(kmz_saveName, img)
+################### MAKING KMZ AND KML FILES ####################
+print ("Making KML/KMZ files...")
 
 
 band_lat = target_2.getBand('latitude')
@@ -282,6 +277,15 @@ boundEast = group.getGeoPos(PixelPos(imWidth, imHeight), GeoPos()).getLon()
 boundSouth = group.getGeoPos(PixelPos(imWidth, imHeight), GeoPos()).getLat()
 
 print boundNorth, boundWest, boundEast, boundSouth
+
+
+# TODO: KMZ generating on hold since I dont know how to show them directly
+"""
+dirName = fileName
+os.makedirs('kmzfiles/' + dirName)
+
+kmz_saveName = 'kmzfiles/' + dirName + '/' + fileName + '.png'
+cv2.imwrite(kmz_saveName, img)
 
 print "Writing KML file..."  # TODO: Make legend (bar that shows backscatter color scale)
 txt_file = open('kmzfiles/' + dirName + "/doc.kml", "w")
@@ -315,7 +319,7 @@ for dirname, subdirs, files in os.walk('kmzfiles/' + dirName):
     for filename in files:
         zf.write(os.path.join(dirname, filename))
 zf.close()
-
+"""
 
 # MAKING KML TO OVERLAY IN MAP.HTML
 print("Making KML to overlay in Map.html...")

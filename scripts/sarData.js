@@ -45,9 +45,15 @@ xhr.onreadystatechange = function() {
             var desc = document.createElement("div");
             desc.setAttribute("class", "desc");
             var temp = names[i].split('.png')[0].split('sentinel_images/')[1];
-            var kmlURL = "http://lundinblackoil.com/peder/kmlfiles/" + names[i]
+            console.log(temp)
+            if (temp.indexOf(':') == -1) {
+                tempName = temp.split('-').slice(0,4).join('-') + ':' + temp.split('-')[4]; //Used to display time bether
+            }
+            else {
+                tempName = temp;
+            }
             if (links[i] != "NO_LINK"){
-                desc.innerHTML = temp + "<a id=" + temp + " onclick='showMapWithKmlURL(this)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
+                desc.innerHTML = tempName + "<a id=" + temp + " onclick='showMapWithKmlURL(this)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
             }
             else {
                 desc.innerHTML = temp;

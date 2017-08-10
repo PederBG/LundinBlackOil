@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentinel-1A Tracker</title>
+    <link rel="stylesheet" href="style/navbar.css" type="text/css">
+</head>
+<!-- ------------------ NavBar ----------------- -->
+<div id="navbar">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="sentinel.html">Sentinel-1 Data</a></li>
+        <li style="float:right"><a href="S1A.html">Tracker</a></li>
+    </ul>
+</div>
+<!-- ------------------ ------ ----------------- -->
+<body style="background-color:  #f2f2f2;">
+    <div style="border: solid 2px black;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: -1;">
+        <script type="text/javascript" src="http://www.satflare.com/export/xvsft.asp?k=1&q=39634&w=1000&h=700&z=2"></script>
+    </div>
+    <button onclick="window.open('S1B.html', '_self');" style="background-color:gray; border-radius:15%; width:20%; padding: 5px 0 5px 0; left:40%; bottom: 10%; position: absolute; color:whitesmoke text-decoration: none; cursor:pointer;">Change to Sentinel-1B</button>
+</body>
+</html>
