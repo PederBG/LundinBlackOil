@@ -22,3 +22,11 @@ sentinel_images/sentinel-image(a)_08-08-2017_05:18.png https://colhub.met.no/oda
 sentinel_images/sentinel-image(a)_09-08-2017_05-11.png https://colhub.met.no/odata/v1/Products('03d3f2ed-42bd-427d-8781-2fdb56025af1')/$value
 sentinel_images/sentinel-image(a)_09-08-2017_15-42.png https://colhub.met.no/odata/v1/Products('6c07d7ac-8d9e-433a-8b61-5eea1b055639')/$value
 sentinel_images/sentinel-image(a)_10-08-2017_15-35.png https://colhub.met.no/odata/v1/Products('7d5b1076-646c-44d2-b89b-df9b219c41d3')/$value
+sentinel_images/sentinel-image(a)_10-08-2017_15-35(VH).png https://colhub.met.no/odata/v1/Products('7d5b1076-646c-44d2-b89b-df9b219c41d3')/$value
+sentinel_images/sentinel-image(a)_13-08-2017_15-59.png https://colhub.met.no/odata/v1/Products('ceb9e1d9-ee84-42d2-9cb8-625ffd344e0a')/$value
+sentinel_images/sentinel-image(a)_16-08-2017_15-34.png https://colhub.met.no/odata/v1/Products('b1a5445f-4c59-4cd3-aef7-094ccd883db2')/$value
+sentinel_images/sentinel-image(a)_19-08-2017_15-59.png https://colhub.met.no/odata/v1/Products('f1fbb783-8807-4718-8a4a-bcda8bda36a5')/$value
+sentinel_images/sentinel-image(a)_21-08-2017_05-11.png https://colhub.met.no/odata/v1/Products('63d901b9-0bc9-469f-ab95-b502c5a86f0a')/$value
+sentinel_images/sentinel-image(a)_22-08-2017_15-35.png https://colhub.met.no/odata/v1/Products('f16e85b3-fa0e-4521-823a-9689421068bd')/$value
+sentinel_images/sentinel-image(a)_25-08-2017_15-59.png https://colhub.met.no/odata/v1/Products('574c1707-9b26-4563-8d66-7e0bc1e5733b')/$value
+sentinel_images/sentinel-image(a)_27-08-2017_15-43.png https://colhub.met.no/odata/v1/Products('4399da7b-e565-4a92-b1b3-e5baa16ae5fd')/$value

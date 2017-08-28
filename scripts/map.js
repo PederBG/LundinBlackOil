@@ -325,3 +325,7 @@ makeAllInfoWindows(argInfoWindows);
 catch (e){
     //alert("Cannot get weather data.\n\nCORS error: Cross-origin request is not allowed. Fix it, Peder.\n");
 }*/
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------

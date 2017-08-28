@@ -11,7 +11,7 @@ xhr.onreadystatechange = function() {
 
 	var names = [];
 	var links = [];
-        for (var i = 0; i < result.length -1; i++){
+        for (var i = (result.length - 2); i > -1; i--){ // result.lenght-1 is undefined
             names.push(result[i].split(" ")[0]);
             links.push(result[i].split(" ")[1]);
         }

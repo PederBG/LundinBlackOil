@@ -283,10 +283,8 @@ print boundNorth, boundWest, boundEast, boundSouth
 dirName = fileName
 """
 os.makedirs('kmzfiles/' + dirName)
-
 kmz_saveName = 'kmzfiles/' + dirName + '/' + fileName + '.png'
 cv2.imwrite(kmz_saveName, img)
-
 print "Writing KML file..."  # TODO: Make legend (bar that shows backscatter color scale)
 txt_file = open('kmzfiles/' + dirName + "/doc.kml", "w")
 txt_file.write(
@@ -312,7 +310,6 @@ txt_file.write(
     '</kml>'
 )
 txt_file.close()
-
 zf = zipfile.ZipFile('kmzfiles/' + dirName + ".zip", "w")
 for dirname, subdirs, files in os.walk('kmzfiles/' + dirName):
     zf.write(dirname)
