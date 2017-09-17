@@ -43,15 +43,22 @@ xhr.onreadystatechange = function() {
 
             var desc = document.createElement("div");
             desc.setAttribute("class", "desc");
+            desc.setAttribute("href", "sentinel_images/sentinel-image(C)_15-09-2017_15-35.png");
             var temp = names[i].split('.png')[0].split('sentinel_images/')[1];
-            console.log(temp)
             if (temp.indexOf(':') == -1) {
                 tempName = temp.split('-').slice(0,4).join('-') + ':' + temp.split('-')[4]; //Used to display time bether
             }
             else {
                 tempName = temp;
             }
-            desc.innerHTML = tempName;
+            testName = "<div onclick='downloadClearImage(this)' style='cursor:pointer;'>" + tempName + "</div>";
+            
+            if (i < (result.length - 2) - 35){ // Bad solution, but works..
+                desc.innerHTML = testName;
+            }
+            else{
+                desc.innerHTML = tempName
+            }
             gal.appendChild(desc)
             
             var popup = document.createElement("div");
@@ -87,6 +94,11 @@ function togglePopup(e){
     }
 }
 
+function downloadClearImage(image){
+    clearImage = 'sentinel_images/' + image.innerHTML.split('(a)')[0] + '(C)' + image.innerHTML.split('(a)')[1] + '.png';
+    compPath = clearImage.split(':')[0] + '-' + clearImage.split(':')[1]
+    window.location = compPath; //TODO fix this!
+}
 
 document.addEventListener("click", function(e){
     console.log(e.target.tagName);

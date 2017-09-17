@@ -81,6 +81,11 @@ if (tempSize < maxSize):
     print("Downloading " + smallestName + ", Size: " + str(tempSize) + " bytes.")
 else:
     print("No file small enough to download")
+    
+fileName = 'sentinel-image(a)_' + smallestDate
+cleanFileName = 'sentinel-image(C)_' + smallestDate
+saveName = 'sentinel_images/' + fileName + '.png'  # file name
+cleanSaveName = 'sentinel_images/' + cleanFileName + '.png' 
 # ----------------------------------------------------------------
 
 
@@ -167,6 +172,9 @@ dateHourMin = time.strftime("%H:%M")
 name = File('temp.png')
 print("...")
 imageIO.write(image, 'PNG', name)
+
+imageIO.write(image, 'PNG', File(cleanSaveName))
+
 print("Image created")
 # -------------------------------------------------------------------------------------------
 
@@ -251,9 +259,6 @@ font = cv2.FONT_HERSHEY_COMPLEX
 cv2.putText(img, ('Wind data from grid: ' + splitGrid[0] + 'N, ' + splitGrid[1] + 'E'), (10 * p, 20 * p), font, 0.3 * p,
             (0, 0, 255), p)
 cv2.putText(img, (str(obsSpeed) + " mps, from " + obsDir), (10 * p, 40 * p), font, 0.3 * p, (0, 0, 255), p)
-
-fileName = 'sentinel-image(a)_' + smallestDate
-saveName = 'sentinel_images/' + fileName + '.png'  # file name
 
 cv2.imwrite(saveName, img)
 print("Wind vector created and added to image!")
