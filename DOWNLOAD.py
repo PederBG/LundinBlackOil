@@ -37,6 +37,20 @@ tee = Tee(sys.stdout, logFile)
 sys.stdout = tee
 sys.stderr = tee
 # ----------------------------------------------------------------
+# deletes the used files (only works on linux OS)
+def removeUsedFiles():
+    os.remove(smallestName + '.zip')
+    os.remove('temp.dim')
+    os.remove('temp.png')
+    os.remove('temp2.dim')
+    os.remove('temp3.dim')
+    
+    shutil.rmtree(smallestName + '.SAFE')
+    shutil.rmtree('temp.data')
+    shutil.rmtree('temp2.data')
+    shutil.rmtree('temp3.data')
+# shutil.rmtree('kmzfiles/' + dirName) # KMZ file generating on hold...
+# ----------------------------------------------------------------
 
 # connect to the API
 # api = SentinelAPI('PederBG', 'Copernicus', 'https://scihub.copernicus.eu/dhus') # For areas outside Norway
@@ -85,7 +99,7 @@ else:
 fileName = 'sentinel-image(a)_' + smallestDate
 cleanFileName = 'sentinel-image(C)_' + smallestDate
 saveName = 'sentinel_images/' + fileName + '.png'  # file name
-cleanSaveName = 'sentinel_images/' + cleanFileName + '.png' 
+cleanSaveName = 'sentinel_images_clean/' + cleanFileName + '.png' 
 # ----------------------------------------------------------------
 
 
@@ -166,14 +180,17 @@ File = JPY.get_type('java.io.File')
 
 p = productTER
 band = p.getBand('Sigma0_VV')
-image = band.createColorIndexedImage(ProgressMonitor.NULL)
-date = time.strftime("%d%m%Y_%H%M%S")  # dd/mm/yyyy format
-dateHourMin = time.strftime("%H:%M")
+
+# Here the Java HeapSpace error will occur
+try:
+    first_image = band.createColorIndexedImage(ProgressMonitor.NULL)
+except RuntimeError:
+    removeUsedFiles()
+    quit()
+    
 name = File('temp.png')
 print("...")
-imageIO.write(image, 'PNG', name)
-
-imageIO.write(image, 'PNG', File(cleanSaveName))
+imageIO.write(first_image, 'PNG', name)
 
 print("Image created")
 # -------------------------------------------------------------------------------------------
@@ -261,6 +278,7 @@ cv2.putText(img, ('Wind data from grid: ' + splitGrid[0] + 'N, ' + splitGrid[1] 
 cv2.putText(img, (str(obsSpeed) + " mps, from " + obsDir), (10 * p, 40 * p), font, 0.3 * p, (0, 0, 255), p)
 
 cv2.imwrite(saveName, img)
+imageIO.write(first_image, 'PNG', File(cleanSaveName))
 print("Wind vector created and added to image!")
 # -------------------------------------------------------------------------------------------
 
@@ -368,20 +386,9 @@ txt_file.write(saveName + ' ' + str(smallestLink) + "\n")
 txt_file.close()
 # -------------------------------------------------------------------------------------------
 
-#################### DELETING USED FILES AND MAKING ZIP-FILE #################### (only works on linux OS)
-# deletes the used files
-os.remove(smallestName + '.zip')
-os.remove('temp.dim')
-os.remove('temp.png')
-os.remove('temp2.dim')
-os.remove('temp3.dim')
-
-shutil.rmtree(smallestName + '.SAFE')
-shutil.rmtree('temp.data')
-shutil.rmtree('temp2.data')
-shutil.rmtree('temp3.data')
-# shutil.rmtree('kmzfiles/' + dirName) # KMZ file generating on hold...
-# -------------------------------------------------------------------------------------------
+#################### DELETING USED FILES AND MAKING ZIP-FILE####################
+removeUsedFiles()
+# ------------------------------------------------------------------------------
 
 # COMPRESSING TO ENABLE DIRECT DOWNLOAD
 zf = zipfile.ZipFile("sentinel_images.zip", "w")

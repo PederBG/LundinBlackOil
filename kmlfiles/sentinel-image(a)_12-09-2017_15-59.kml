@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<Document>
+  <name>sentinel-image(a)_12-09-2017_15-59</name>
+  <description>
+TODOC</description>
+  <GroundOverlay>
+    <name>Raster data</name>
+      <LatLonBox>
+      <north>73.1393350608</north>
+      <south>71.4530176094</south>
+      <east>23.201570074</east>
+      <west>17.4634913652</west>
+    </LatLonBox>
+    <Icon>
+      <href>http://lundinblackoil.com/peder/sentinel_images/sentinel-image(a)_12-09-2017_15-59(R).png</href>
+    </Icon>
+  </GroundOverlay>
+</Document>
+</kml>
