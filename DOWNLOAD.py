@@ -95,6 +95,7 @@ if (tempSize < maxSize):
     print("Downloading " + smallestName + ", Size: " + str(tempSize) + " bytes.")
 else:
     print("No file small enough to download")
+    quit()
     
 fileName = 'sentinel-image(a)_' + smallestDate
 cleanFileName = 'sentinel-image(C)_' + smallestDate
