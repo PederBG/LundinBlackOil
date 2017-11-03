@@ -41,7 +41,6 @@ sys.stderr = tee
 def removeUsedFiles():
     os.remove(smallestName + '.zip')
     os.remove('temp.dim')
-    os.remove('temp.png')
     os.remove('temp2.dim')
     os.remove('temp3.dim')
     
@@ -187,6 +186,7 @@ try:
     first_image = band.createColorIndexedImage(ProgressMonitor.NULL)
 except RuntimeError:
     removeUsedFiles()
+    print("Java Heap Space")
     quit()
     
 name = File('temp.png')
@@ -389,6 +389,7 @@ txt_file.close()
 
 #################### DELETING USED FILES AND MAKING ZIP-FILE####################
 removeUsedFiles()
+os.remove('temp.png')
 # ------------------------------------------------------------------------------
 
 # COMPRESSING TO ENABLE DIRECT DOWNLOAD
