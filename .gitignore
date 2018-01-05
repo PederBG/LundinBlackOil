@@ -3,3 +3,4 @@ sentinel_images.zip
 sentinel_images/*
 sentinel_images_clean/*
 kmzfiles
+*.pyc
