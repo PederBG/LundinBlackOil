@@ -27,7 +27,7 @@ def getS1Data(geojson):
     yestdate = str(int(date)-1)
 
     products = api.query(footprint,
-                         ("20180101", date),
+                         (yestdate, date),
                          platformname='Sentinel-1',
                          producttype='GRD',
                          sensoroperationalmode='IW'

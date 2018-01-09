@@ -14,7 +14,7 @@ from osgeo.gdalconst import *
 from glob import glob
 import datetime
 import time
-import S1_lib
+import s1_lib
 import s1_functions as s1_func
 import s1_drawGrids as s1_draw
 
