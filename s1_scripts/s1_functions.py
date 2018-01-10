@@ -12,6 +12,7 @@ import urllib2
 import xml.etree.ElementTree as ET
 import cv2
 import math
+
 GDALHOME='/usr/bin'
 
 ##------------------------------------------------------------------------------
@@ -27,7 +28,7 @@ def getS1Data(geojson):
     yestdate = str(int(date)-1)
 
     products = api.query(footprint,
-                         ("20180101", date),
+                         ("20180107", date),
                          platformname='Sentinel-1',
                          producttype='GRD',
                          sensoroperationalmode='IW'
