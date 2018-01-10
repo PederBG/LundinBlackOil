@@ -56,45 +56,45 @@ imagenames = [imageVV, imageVH]
 
 #----------------------------------------------------------------
 
-(fileVV,fileVH) = S1_lib.getfilename(infile)
+(fileVV,fileVH) = s1_lib.getfilename(infile)
 infiles = [fileVV,fileVH]
 nbands = 2
-[dateline, gcps, minlon, maxlon, minlat, maxlat] = S1_lib.s1dateline( fileVV )
+[dateline, gcps, minlon, maxlon, minlat, maxlat] = s1_lib.s1dateline( fileVV )
 print("")
 print("minlon:", minlon, "maxlon:", maxlon, "minlat:", minlat, "maxlat:", maxlat)
 print("")
 
 print('## Apply gcps')
-S1_lib.s1applygcp( infiles, working, nbands, gcps )
+s1_lib.s1applygcp( infiles, working, nbands, gcps )
 
 print('## Find Noise xml files for band VV and VH')
-(xmlNoiseFileVV,xmlNoiseFileVH) = S1_lib.getNoiseXML(infile)
+(xmlNoiseFileVV,xmlNoiseFileVH) = s1_lib.getNoiseXML(infile)
 xmlNoiseFile = [xmlNoiseFileVV,xmlNoiseFileVH]
 
 print('## Find Calibration xml files for band VV and VH')
-(xmlCalFileVV,xmlCalFileVH) = S1_lib.getCalXML(infile)
+(xmlCalFileVV,xmlCalFileVH) = s1_lib.getCalXML(infile)
 xmlCalFile = [xmlCalFileVV,xmlCalFileVH]
 
 print('## Find xmlfile with scene inforamtion')
-(xmlFileVV,xmlFileVH) = S1_lib.getXML(infile)
+(xmlFileVV,xmlFileVH) = s1_lib.getXML(infile)
 xmlFile = [xmlFileVV,xmlFileVH]
 
 print('## Generate LUT (2) files for noise')
-S1_lib.genLUT2(working[0], xmlNoiseFile[0], xmlFile[0] ,noisefname[0])
-S1_lib.genLUT2(working[1], xmlNoiseFile[1], xmlFile[1], noisefname[1])
+s1_lib.genLUT2(working[0], xmlNoiseFile[0], xmlFile[0] ,noisefname[0])
+s1_lib.genLUT2(working[1], xmlNoiseFile[1], xmlFile[1], noisefname[1])
 
 print('## Generate LUT files for s0 calibration')
-S1_lib.genLUT(working[0], xmlCalFile[0], calfname[0])
-S1_lib.genLUT(working[1], xmlCalFile[1], calfname[1])
+s1_lib.genLUT(working[0], xmlCalFile[0], calfname[0])
+s1_lib.genLUT(working[1], xmlCalFile[1], calfname[1])
 
 print('## Remove Noise and Calibrate data to db')
 log10=0
-S1_lib.calibrate2d(working[0], calfname[0], noisefname[0], calibrated[0],log10)
-S1_lib.calibrate2d(working[1], calfname[1], noisefname[1], calibrated[1],log10)
+s1_lib.calibrate2d(working[0], calfname[0], noisefname[0], calibrated[0],log10)
+s1_lib.calibrate2d(working[1], calfname[1], noisefname[1], calibrated[1],log10)
 
 print('Warping to polarstereographic projection')
 for i in range(nbands):
-    S1_lib.s1warp(calibrated[i],warpfname[i],PROJSTR)
+    s1_lib.s1warp(calibrated[i],warpfname[i],PROJSTR)
     if ((os.path.isfile(warpfname[i]) == False)):
         print 'Error warping file'
         sys.exit()
@@ -107,7 +107,7 @@ for i in range(nbands):
 
 print('## Generate JPEG from warped tif-file')
 for i in range(nbands):
-    S1_lib.s1image(warpfname[i], imagenames[i])
+    s1_lib.s1image(warpfname[i], imagenames[i])
 
 print('## Add reference coordinates to graticule overlay')
 [pixels, coordinates] = s1_draw.getGeoInfo()
@@ -117,8 +117,8 @@ for i in range(nbands):
 print('## Add wind information from yr.no')
 s1_func.addWindArrow(imageVV, imageVH)
 
-#print('## Make KML-file')
-#s1_func.generateKML()
+print('## Make KML-file')
+s1_func.generateKML("test.kml", minlon, maxlon, minlat, maxlat)
 
 print('## Removed used files')
 s1_func.cleaner()
