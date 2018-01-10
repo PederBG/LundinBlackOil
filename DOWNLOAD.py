@@ -186,7 +186,7 @@ try:
     first_image = band.createColorIndexedImage(ProgressMonitor.NULL)
 except RuntimeError:
     removeUsedFiles()
-    print("Java Heap Space")
+    print("Error: Java Heap Space")
     quit()
     
 name = File('temp.png')
