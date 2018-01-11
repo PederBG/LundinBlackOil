@@ -224,8 +224,7 @@ def genLUT2 (working, xmlFile, xmlFileBeam, outfile):
     valList = numpy.array(valList)
     points = numpy.array([line,pix]).transpose()
     #grid_y, grid_x = numpy.meshgrid(numpy.arange(0, ysize, 1), numpy.arange(0, xsize, 1))
-    grid_y, grid_x = numpy.mgrid[0:ysize:1, 0:xsize:1]
-    #.astype(numpy.uint16)
+    grid_y, grid_x = numpy.mgrid[0:ysize:1, 0:xsize:1].astype(numpy.uint16)
     grid_z0 = interpolate.griddata(points, valList, (grid_y, grid_x), method='nearest')
     print("------------------------->GRIDS:")
     print("gird_y is", grid_y.nbytes, "bytes")
