@@ -21,10 +21,10 @@ import s1_drawGrids as s1_draw
 print('## Get newest Sentinel-1 data')
 [s1File, s1Name, s1Date, s1Link] = s1_func.getS1Data("../smallBarentsSea.geojson")
 
-TMPDIR = '/home/pederbg/repoLundinBO/s1_scripts/tmp'
+TMPDIR = '/home/lundinbl/public_html/peder/s1_scripts/tmp'
 subprocess.call('mkdir tmp', shell=True)
 
-GDALHOME='/usr/bin'
+GDALHOME='/home/lundinbl/gdal/bin'
 PROJSTR = '+proj=stere +lat_0=90.0 +lat_ts=90.0 +lon_0=0.0 +R=6371000'
 
 #infile = '/home/pederbg/Downloads/S1A_IW_GRDM_1SDV_20171219T051117_20171219T051149_019767_0219DF_F8E8.SAFE'
