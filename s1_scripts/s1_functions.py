@@ -169,7 +169,7 @@ def generateKML(fileName, boundNorth, boundSouth, boundEast, boundWest):
 
     print("Making KML to overlay in Map.html...")
 
-    txt_file = open('../kmlfiles/' + fileName + ".kml", "w")
+    txt_file = open(fileName, "w")
     txt_file.write(
         '<?xml version="1.0" encoding="UTF-8"?>' + "\n" +
         '<kml xmlns="http://earth.google.com/kml/2.0">' + "\n" +
@@ -194,3 +194,8 @@ def generateKML(fileName, boundNorth, boundSouth, boundEast, boundWest):
     )
     txt_file.close()
 ##------------------------------------------------------------------------------
+
+def genDownloadLinks(s1Link, linksFile, imName):
+    txt_file = open(linksFile, "a")
+    txt_file.write(imName + ' ' + str(s1Link) + "\n")
+    txt_file.close()

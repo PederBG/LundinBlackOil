@@ -50,9 +50,14 @@ noiseVVfname = TMPDIR+"/noiseVV.tif"
 noiseVHfname = TMPDIR+"/noiseVH.tif"
 noisefname = [noiseVVfname,noiseVHfname]
 
-imageVV = "testVV.jpg"
-imageVH = "testVH.jpg"
+imageVV = "/home/lundinbl/public_html/peder/sentinel_images/sentinel-imageVV" + \
+    s1Date + ".jpg"
+imageVH = "/home/lundinbl/public_html/peder/sentinel_images/sentinel-imageVH" + \
+    s1Date + ".jpg"
 imagenames = [imageVV, imageVH]
+
+kmlName = "/home/lundinbl/public_html/peder/kmlfiles/sentinel-image" + s1Date + ".kml"
+linksFile = "/home/lundinbl/public_html/peder/product_download_links.txt"
 
 #----------------------------------------------------------------
 
@@ -118,7 +123,11 @@ print('## Add wind information from yr.no')
 s1_func.addWindArrow(imageVV, imageVH)
 
 print('## Make KML-file')
-s1_func.generateKML("test.kml", minlon, maxlon, minlat, maxlat)
+s1_func.generateKML(kmlName, minlon, maxlon, minlat, maxlat)
+
+print('## Append to download links file')
+for i in range(nbands):
+    s1_func.genDownloadLinks(s1Link, linksFile, imagenames[i])
 
 print('## Removed used files')
 s1_func.cleaner()
