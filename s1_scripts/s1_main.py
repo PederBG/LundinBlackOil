@@ -50,11 +50,16 @@ noiseVVfname = TMPDIR+"/noiseVV.tif"
 noiseVHfname = TMPDIR+"/noiseVH.tif"
 noisefname = [noiseVVfname,noiseVHfname]
 
-imageVV = "/home/lundinbl/public_html/peder/sentinel_images/sentinel-imageVV" + \
+justNameVV = "sentinel-imageVV_" + \
     s1Date + ".jpg"
-imageVH = "/home/lundinbl/public_html/peder/sentinel_images/sentinel-imageVH" + \
+justNameVH = "sentinel-imageVH_" + \
     s1Date + ".jpg"
+justNames = [justNameVV, justNameVH]
+
+imageVV = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV
+imageVH = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVH
 imagenames = [imageVV, imageVH]
+
 
 kmlName = "/home/lundinbl/public_html/peder/kmlfiles/sentinel-image" + s1Date + ".kml"
 linksFile = "/home/lundinbl/public_html/peder/product_download_links.txt"
@@ -131,5 +136,5 @@ for i in range(nbands):
 
 print('## Removed used files')
 s1_func.cleaner()
-s1_func.cleaner("testVV.jpg.aux.xml")
-s1_func.cleaner("testVH.jpg.aux.xml")
+for i in range(nbands):
+    s1_func.cleaner(imagenames[i] + ".aux.xml")
