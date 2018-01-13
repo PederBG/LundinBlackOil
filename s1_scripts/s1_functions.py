@@ -203,5 +203,5 @@ def genDownloadLinks(s1Link, linksFile, imName):
     txt_file.close()
 
 def getAverageWind(GRID):
-    root = s1_func.getWindInfo(GRID, simple=False)
+    root = getWindInfo(GRID, simple=False)
     #TODO
