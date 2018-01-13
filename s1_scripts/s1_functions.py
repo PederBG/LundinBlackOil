@@ -46,7 +46,7 @@ def getS1Data(geojson):
 
     # FINDING SMALLEST FILE
     smallestFile = None
-    tempSize = 9999999999
+    tempSize = 999999999999
     #tempSize = 1
     for i in range(0, len(products)):
         if (api.get_product_odata(products_df.index[i])["size"] < tempSize):
