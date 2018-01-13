@@ -5,6 +5,7 @@
 ########################
 
 import os, sys, subprocess, shutil
+from shutil import copyfile as cp
 import numpy as np
 import math
 from osgeo import gdal
@@ -24,7 +25,7 @@ subprocess.call('mkdir tmp', shell=True)
 GDALHOME='/home/lundinbl/gdal/bin'
 PROJSTR = '+proj=stere +lat_0=90.0 +lat_ts=90.0 +lon_0=0.0 +R=6371000'
 GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
-MAXWIND = 12 # If the wind speed is higher image will not be generated
+MAXWIND = 9999 # If the wind speed is higher image will not be generated
 
 print('## Check if wind is low enough to run image')
 #s1_func.getAverageWind(GRID) TODO
@@ -47,10 +48,6 @@ calibratedVV = TMPDIR + "/calibratedVV.tif"
 calibratedVH = TMPDIR + "/calibratedVH.tif"
 calibrated = [calibratedVV,calibratedVH]
 
-warpVVfname = TMPDIR+"/warpedVV.tif"
-warpVHfname = TMPDIR+"/warpedVH.tif"
-warpfname = [warpVVfname,warpVHfname]
-
 calVVfname = TMPDIR+"/calVV.tif"
 calVHfname = TMPDIR+"/calVH.tif"
 calfname = [calVVfname,calVHfname]
@@ -59,15 +56,37 @@ noiseVVfname = TMPDIR+"/noiseVV.tif"
 noiseVHfname = TMPDIR+"/noiseVH.tif"
 noisefname = [noiseVVfname,noiseVHfname]
 
-justNameVV = "sentinel-imageVV_" + \
-    s1Date + ".jpg"
-justNameVH = "sentinel-imageVH_" + \
-    s1Date + ".jpg"
+warpVVfname = TMPDIR+"/warpedVV.tif"
+warpVHfname = TMPDIR+"/warpedVH.tif"
+warpfname = [warpVVfname,warpVHfname]
+
+warpVVfname_clear = TMPDIR+"/warpedVV(c).tif"
+warpVHfname_clear = TMPDIR+"/warpedVH(c).tif"
+warpfname_clear = [warpVVfname,warpVHfname]
+
+justNameVV = "sentinel-imageVV_" + s1Date + ".jpg"
+justNameVH = "sentinel-imageVH_" + s1Date + ".jpg"
 justNames = [justNameVV, justNameVH]
 
 imageVV = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV
 imageVH = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVH
 imagenames = [imageVV, imageVH]
+
+justNameVV_clear = "sentinel-imageVV_" + s1Date + "(c).jpg"
+justNameVH_clear = "sentinel-imageVH_" + s1Date + "(c).jpg"
+justNames_clear = [justNameVV, justNameVH]
+
+imageVV_clear = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV_clear
+imageVH_clear = "/home/lundinbl/public_html/peder/sentinel_images/"     + justNameVH_clear
+imagenames_clear = [imageVV, imageVH]
+
+justNameVV_thumb = "sentinel-imageVV_" + s1Date + "(t).jpg"
+justNameVH_thumb = "sentinel-imageVH_" + s1Date + "(t).jpg"
+justNames_thumb = [justNameVV, justNameVH]
+
+imageVV_thumb = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV_thumb
+imageVH_thumb = "/home/lundinbl/public_html/peder/sentinel_images/"     + justNameVH_thumb
+imagenames_thumb = [imageVV, imageVH]
 
 
 kmlName = "/home/lundinbl/public_html/peder/kmlfiles/sentinel-image" + s1Date + ".kml"
@@ -118,6 +137,10 @@ for i in range(nbands):
         print 'Error warping file'
         sys.exit()
 
+print('## Copy the clear image before adding grid overlay.')
+for i in range(nbands):
+    cp( warpfname[i], imagenames_clear[i])
+
 print('## Add graticule overlay')
 s1_func.mkGraticule()
 for i in range(nbands):
@@ -127,6 +150,7 @@ for i in range(nbands):
 print('## Generate JPEG from warped tif-file')
 for i in range(nbands):
     s1_lib.s1image(warpfname[i], imagenames[i])
+    s1_lib.s1image(warpfname_clear[i], imagenames_clear[i])
 
 print('## Add reference coordinates to graticule overlay')
 [pixels, coordinates] = s1_draw.getGeoInfo()
@@ -138,6 +162,10 @@ s1_func.addWindArrow([imageVV, imageVH], GRID)
 
 print('## Make KML-file')
 s1_func.generateKML(kmlName, minlon, maxlon, minlat, maxlat)
+
+print('## Make thumbnail image')
+for i in range(bands):
+    s1_func.makeThumbnail(imagenames_clear[i], imagenames_thumb[i])
 
 print('## Append to download links file')
 for i in range(nbands):

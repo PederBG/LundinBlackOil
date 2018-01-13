@@ -205,3 +205,9 @@ def genDownloadLinks(s1Link, linksFile, imName):
 def getAverageWind(GRID):
     root = getWindInfo(GRID, simple=False)
     #TODO
+
+def makeThumbnail(inputName, saveName):
+    resizeInput = cv2.imread(inputName)
+    height, width = img.shape[:2]
+    resized = cv2.resize(resizeInput, (int(0.04 * width), int(0.04 * height)), interpolation=cv2.INTER_CUBIC)
+    cv2.imwrite(saveName, resized)
