@@ -103,7 +103,7 @@ def cleaner(target_file = "tmp"):
 ##------------------------------------------------------------------------------
 
 ##------------------------------------------------------------------------------
-def getWindInfo(GRID):
+def getWindInfo(GRID, simple=True):
     # CONNECT TO YR.NO
     print("Connecting to yr.no...")
 
@@ -121,10 +121,12 @@ def getWindInfo(GRID):
     obsDir = root[5][0][0][2].get('name')
 
     print("Wind: ", obsSpeed, " mps, direction: ", obsDeg, "degrees.")
-    return [obsSpeed, obsDeg, obsDir]
+    if simple:
+        return [obsSpeed, obsDeg, obsDir]
+    else:
+        return root
     # ----------------------------------------------------------------
-def addWindArrow(*imNames):
-    GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
+def addWindArrow(imNames, GRID):
     splitGrid = GRID.split('_')
     [obsSpeed, obsDeg, obsDir] = getWindInfo(GRID)
     first = True
@@ -199,3 +201,7 @@ def genDownloadLinks(s1Link, linksFile, imName):
     txt_file = open(linksFile, "a")
     txt_file.write(imName + ' ' + str(s1Link) + "\n")
     txt_file.close()
+
+def getAverageWind(GRID):
+    root = s1_func.getWindInfo(GRID, simple=False)
+    print(root)

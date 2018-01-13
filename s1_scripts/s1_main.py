@@ -18,14 +18,19 @@ import s1_lib
 import s1_functions as s1_func
 import s1_drawGrids as s1_draw
 
-print('## Get newest Sentinel-1 data')
-[s1File, s1Name, s1Date, s1Link] = s1_func.getS1Data("../smallBarentsSea.geojson")
-
 TMPDIR = '/home/lundinbl/public_html/peder/s1_scripts/tmp'
 subprocess.call('mkdir tmp', shell=True)
 
 GDALHOME='/home/lundinbl/gdal/bin'
 PROJSTR = '+proj=stere +lat_0=90.0 +lat_ts=90.0 +lon_0=0.0 +R=6371000'
+GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
+MAXWIND = 12 # If the wind speed is higher image will not be generated
+
+print('## Check if wind is low enough to run image')
+s1_func.getAverageWind(GRID)
+
+print('## Get newest Sentinel-1 data')
+[s1File, s1Name, s1Date, s1Link] = s1_func.getS1Data("../smallBarentsSea.geojson")
 
 #infile = '/home/pederbg/Downloads/S1A_IW_GRDM_1SDV_20171219T051117_20171219T051149_019767_0219DF_F8E8.SAFE'
 infile = s1Name + ".SAFE"
@@ -125,7 +130,7 @@ for i in range(nbands):
     s1_draw.drawCords(pixels, coordinates, imagenames[i], imagenames[i])
 
 print('## Add wind information from yr.no')
-s1_func.addWindArrow(imageVV, imageVH)
+s1_func.addWindArrow([imageVV, imageVH], GRID)
 
 print('## Make KML-file')
 s1_func.generateKML(kmlName, minlon, maxlon, minlat, maxlat)
