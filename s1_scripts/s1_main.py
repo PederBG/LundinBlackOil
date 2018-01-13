@@ -27,7 +27,11 @@ GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
 MAXWIND = 12 # If the wind speed is higher image will not be generated
 
 print('## Check if wind is low enough to run image')
-s1_func.getAverageWind(GRID)
+#s1_func.getAverageWind(GRID) TODO
+windSpeed = s1_func.getWindInfo(GRID, simple=True)[0]
+if windSpeed > MAXWIND:
+    print("Image is not usable for oil detection. Too much wind in the area.")
+    quit()
 
 print('## Get newest Sentinel-1 data')
 [s1File, s1Name, s1Date, s1Link] = s1_func.getS1Data("../smallBarentsSea.geojson")
@@ -137,7 +141,7 @@ s1_func.generateKML(kmlName, minlon, maxlon, minlat, maxlat)
 
 print('## Append to download links file')
 for i in range(nbands):
-    s1_func.genDownloadLinks(s1Link, linksFile, imagenames[i])
+    s1_func.genDownloadLinks(s1Link, linksFile, justNames[i])
 
 print('## Removed used files')
 s1_func.cleaner()

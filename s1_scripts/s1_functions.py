@@ -199,9 +199,9 @@ def generateKML(fileName, boundNorth, boundSouth, boundEast, boundWest):
 
 def genDownloadLinks(s1Link, linksFile, imName):
     txt_file = open(linksFile, "a")
-    txt_file.write(imName + ' ' + str(s1Link) + "\n")
+    txt_file.write("sentinel_images/" + imName + ' ' + str(s1Link) + "\n")
     txt_file.close()
 
 def getAverageWind(GRID):
     root = s1_func.getWindInfo(GRID, simple=False)
-    print(root)
+    #TODO
