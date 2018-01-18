@@ -2,7 +2,7 @@
  * Created by PederGB on 10.07.2017.
  */
  var listFiles = [];
- 
+
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -34,17 +34,17 @@ xhr.onreadystatechange = function() {
             var tar = document.createElement("a");
             tar.setAttribute("onclick", "togglePopup(this)");
             gal.appendChild(tar);
-            
+
             var img = document.createElement("img");
-            img.setAttribute("src", names[i].split(".png")[0] + "(R).png");
+            img.setAttribute("src", names[i].split(".jpg")[0] + "(t).jpg");
             img.setAttribute("height", "200");
             img.setAttribute("width", "300");
             tar.appendChild(img);
 
             var desc = document.createElement("div");
             desc.setAttribute("class", "desc");
-            desc.setAttribute("href", "sentinel_images_clean/sentinel-image(C)_15-09-2017_15-35.png");
-            var temp = names[i].split('.png')[0].split('sentinel_images/')[1];
+            //desc.setAttribute("href", "sentinel_images_clean/sentinel-image(C)_15-09-2017_15-35.png");
+            var temp = names[i].split('.jpg')[0].split('sentinel_images/')[1];
             if (temp.indexOf(':') == -1) {
                 tempName = temp.split('-').slice(0,4).join('-') + ':' + temp.split('-')[4]; //Used to display time bether
             }
@@ -52,7 +52,7 @@ xhr.onreadystatechange = function() {
                 tempName = temp;
             }
             testName = "<div onclick='downloadClearImage(this)' style='cursor:pointer;'>" + tempName + "</div>";
-            
+
             if (i < (result.length - 2) - 35){ // Bad solution, but works..
                 desc.innerHTML = testName;
             }
@@ -60,11 +60,11 @@ xhr.onreadystatechange = function() {
                 desc.innerHTML = tempName
             }
             gal.appendChild(desc)
-            
+
             var popup = document.createElement("div");
             popup.setAttribute("class", "popup");
             res.appendChild(popup);
-            
+
             popup.innerHTML = "<a href=" + names[i] + " class='popup_first'><p>View Image</p></a><a id=" + temp + " onclick='showMapWithKmlURL(this)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
         }
     }
@@ -95,7 +95,7 @@ function togglePopup(e){
 }
 
 function downloadClearImage(image){
-    clearImage = 'sentinel_images_clean/' + image.innerHTML.split('(a)')[0] + '(C)' + image.innerHTML.split('(a)')[1] + '.png';
+    clearImage = 'sentinel_images_clean/' + image.innerHTML.split('image')[0] + 'image(c)' + image.innerHTML.split('image')[1] + '.jpg';
     compPath = clearImage.split(':')[0] + '-' + clearImage.split(':')[1]
     window.location = compPath; //TODO fix this!
 }
@@ -110,4 +110,3 @@ document.addEventListener("click", function(e){
         }
     }
 });
-

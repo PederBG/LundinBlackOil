@@ -58,11 +58,11 @@ noisefname = [noiseVVfname,noiseVHfname]
 
 warpVVfname = TMPDIR+"/warpedVV.tif"
 warpVHfname = TMPDIR+"/warpedVH.tif"
-warpfname = [warpVVfname,warpVHfname]
+warpfname = [warpVVfname, warpVHfname]
 
 warpVVfname_clear = TMPDIR+"/warpedVV(c).tif"
 warpVHfname_clear = TMPDIR+"/warpedVH(c).tif"
-warpfname_clear = [warpVVfname,warpVHfname]
+warpfname_clear = [warpVVfname_clear,warpVHfname_clear]
 
 justNameVV = "sentinel-imageVV_" + s1Date + ".jpg"
 justNameVH = "sentinel-imageVH_" + s1Date + ".jpg"
@@ -74,22 +74,22 @@ imagenames = [imageVV, imageVH]
 
 justNameVV_clear = "sentinel-imageVV_" + s1Date + "(c).jpg"
 justNameVH_clear = "sentinel-imageVH_" + s1Date + "(c).jpg"
-justNames_clear = [justNameVV, justNameVH]
+justNames_clear = [justNameVV_clear, justNameVH_clear]
 
 imageVV_clear = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV_clear
 imageVH_clear = "/home/lundinbl/public_html/peder/sentinel_images/"     + justNameVH_clear
-imagenames_clear = [imageVV, imageVH]
+imagenames_clear = [imageVV_clear, imageVH_clear]
 
 justNameVV_thumb = "sentinel-imageVV_" + s1Date + "(t).jpg"
 justNameVH_thumb = "sentinel-imageVH_" + s1Date + "(t).jpg"
-justNames_thumb = [justNameVV, justNameVH]
+justNames_thumb = [justNameVV_thumb, justNameVH_thumb]
 
 imageVV_thumb = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV_thumb
 imageVH_thumb = "/home/lundinbl/public_html/peder/sentinel_images/"     + justNameVH_thumb
-imagenames_thumb = [imageVV, imageVH]
+imagenames_thumb = [imageVV_thumb, imageVH_thumb]
 
 
-kmlName = "/home/lundinbl/public_html/peder/kmlfiles/sentinel-image" + s1Date + ".kml"
+kmlName = "sentinel-image" + s1Date + ".kml"
 linksFile = "/home/lundinbl/public_html/peder/product_download_links.txt"
 
 #----------------------------------------------------------------
@@ -137,9 +137,9 @@ for i in range(nbands):
         print 'Error warping file'
         sys.exit()
 
-print('## Copy the clear image before adding grid overlay.')
+print('## Copy the clear image before adding grid overlay')
 for i in range(nbands):
-    cp( warpfname[i], imagenames_clear[i])
+    cp( warpfname[i], warpfname_clear[i])
 
 print('## Add graticule overlay')
 s1_func.mkGraticule()
@@ -164,7 +164,7 @@ print('## Make KML-file')
 s1_func.generateKML(kmlName, minlon, maxlon, minlat, maxlat)
 
 print('## Make thumbnail image')
-for i in range(bands):
+for i in range(nbands):
     s1_func.makeThumbnail(imagenames_clear[i], imagenames_thumb[i])
 
 print('## Append to download links file')
