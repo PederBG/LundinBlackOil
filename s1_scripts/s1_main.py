@@ -60,8 +60,8 @@ warpVVfname = TMPDIR+"/warpedVV.tif"
 warpVHfname = TMPDIR+"/warpedVH.tif"
 warpfname = [warpVVfname, warpVHfname]
 
-warpVVfname_clear = TMPDIR+"/warpedVV(c).tif"
-warpVHfname_clear = TMPDIR+"/warpedVH(c).tif"
+warpVVfname_clear = TMPDIR+"/warpedVV_c.tif"
+warpVHfname_clear = TMPDIR+"/warpedVH_c.tif"
 warpfname_clear = [warpVVfname_clear,warpVHfname_clear]
 
 justNameVV = "sentinel-imageVV_" + s1Date + ".jpg"
@@ -72,16 +72,16 @@ imageVV = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV
 imageVH = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVH
 imagenames = [imageVV, imageVH]
 
-justNameVV_clear = "sentinel-imageVV_" + s1Date + "(c).jpg"
-justNameVH_clear = "sentinel-imageVH_" + s1Date + "(c).jpg"
+justNameVV_clear = "sentinel-imageVV_" + s1Date + "_c.jpg"
+justNameVH_clear = "sentinel-imageVH_" + s1Date + "_c.jpg"
 justNames_clear = [justNameVV_clear, justNameVH_clear]
 
-imageVV_clear = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV_clear
-imageVH_clear = "/home/lundinbl/public_html/peder/sentinel_images/"     + justNameVH_clear
+imageVV_clear = "/home/lundinbl/public_html/peder/sentinel_images_clear/" + justNameVV_clear
+imageVH_clear = "/home/lundinbl/public_html/peder/sentinel_images_clear/"     + justNameVH_clear
 imagenames_clear = [imageVV_clear, imageVH_clear]
 
-justNameVV_thumb = "sentinel-imageVV_" + s1Date + "(t).jpg"
-justNameVH_thumb = "sentinel-imageVH_" + s1Date + "(t).jpg"
+justNameVV_thumb = "sentinel-imageVV_" + s1Date + "_t.jpg"
+justNameVH_thumb = "sentinel-imageVH_" + s1Date + "_t.jpg"
 justNames_thumb = [justNameVV_thumb, justNameVH_thumb]
 
 imageVV_thumb = "/home/lundinbl/public_html/peder/sentinel_images/" + justNameVV_thumb
@@ -89,7 +89,10 @@ imageVH_thumb = "/home/lundinbl/public_html/peder/sentinel_images/"     + justNa
 imagenames_thumb = [imageVV_thumb, imageVH_thumb]
 
 
-kmlName = "sentinel-image" + s1Date + ".kml"
+kmlNameVV = "sentinel-imageVV_" + s1Date + ".kml"
+kmlNameVH = "sentinel-imageVH_" + s1Date + ".kml"
+kmlNames = [kmlNameVV, kmlNameVH]
+
 linksFile = "/home/lundinbl/public_html/peder/product_download_links.txt"
 
 #----------------------------------------------------------------
@@ -161,7 +164,8 @@ print('## Add wind information from yr.no')
 s1_func.addWindArrow([imageVV, imageVH], GRID)
 
 print('## Make KML-file')
-s1_func.generateKML(kmlName, minlon, maxlon, minlat, maxlat)
+for i in range(nbands):
+    s1_func.generateKML(kmlNames[i], minlon, maxlon, minlat, maxlat)
 
 print('## Make thumbnail image')
 for i in range(nbands):
@@ -175,3 +179,4 @@ print('## Removed used files')
 s1_func.cleaner()
 for i in range(nbands):
     s1_func.cleaner(imagenames[i] + ".aux.xml")
+    s1_func.cleaner(imagenames_clear[i] + ".aux.xml")

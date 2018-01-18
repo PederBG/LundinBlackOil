@@ -36,7 +36,7 @@ xhr.onreadystatechange = function() {
             gal.appendChild(tar);
 
             var img = document.createElement("img");
-            img.setAttribute("src", names[i].split(".jpg")[0] + "(t).jpg");
+            img.setAttribute("src", names[i].split(".jpg")[0] + "_t.jpg");
             img.setAttribute("height", "200");
             img.setAttribute("width", "300");
             tar.appendChild(img);

@@ -171,7 +171,7 @@ def generateKML(fileName, boundNorth, boundSouth, boundEast, boundWest):
 
     print("Making KML to overlay in Map.html...")
 
-    txt_file = open(fileName, "w")
+    txt_file = open("/home/lundinbl/public_html/peder/kmlfiles/" + fileName, "w")
     txt_file.write(
         '<?xml version="1.0" encoding="UTF-8"?>' + "\n" +
         '<kml xmlns="http://earth.google.com/kml/2.0">' + "\n" +
@@ -207,6 +207,8 @@ def getAverageWind(GRID):
     #TODO
 
 def makeThumbnail(inputName, saveName):
+    print(inputName)
+    print(saveName)
     resizeInput = cv2.imread(inputName)
     height, width = resizeInput.shape[:2]
     resized = cv2.resize(resizeInput, (int(0.04 * width), int(0.04 * height)), interpolation=cv2.INTER_CUBIC)

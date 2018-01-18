@@ -442,6 +442,7 @@ def s1warp(working,warpfname,projstr):
         sys.exit(-1)
 
 def s1image(working, imagename):
+    print("Making image " + imagename + " from file " + working + "...")
     cmd = GDALHOME + "/gdal_translate -of JPEG " + \
         "-scale " + working + " " + imagename
     retcode = subprocess.call(cmd, shell=True)
