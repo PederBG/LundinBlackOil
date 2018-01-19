@@ -14,6 +14,7 @@ import cv2
 import math
 
 GDALHOME='/home/lundinbl/gdal/bin'
+HOMEDIR = '/home/lundinbl/public_html/peder'
 
 ##------------------------------------------------------------------------------
 def getS1Data(geojson):
@@ -213,9 +214,9 @@ def makeThumbnail(inputName, saveName):
     resized = cv2.resize(resizeInput, (int(0.04 * width), int(0.04 * height)), interpolation=cv2.INTER_CUBIC)
     cv2.imwrite(saveName, resized)
 
-def makeZipFile(dirs=["sentinel_images", "sentinel_images_clear"]):
-    zf = zipfile.ZipFile("sentinel_images.zip", "w")
-    for i in range(dirs):
+def makeZipFile(dirs=[HOMEDIR +"/sentinel_images", HOMEDIR+"/sentinel_images_clear"]):
+    zf = zipfile.ZipFile(HOMEDIR + "/sentinel_images.zip", "w")
+    for i in range(len(dirs)):
         for dirname, subdirs, files in os.walk(dirs[i]):
             zf.write(dirname)
             for filename in files:
