@@ -65,7 +65,7 @@ xhr.onreadystatechange = function() {
             popup.setAttribute("class", "popup");
             res.appendChild(popup);
 
-            popup.innerHTML = "<a href=" + names[i] + " class='popup_first'><p>View Image</p></a><a id=" + temp + " onclick='showMapWithKmlURL(this)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
+            popup.innerHTML = "<a href=" + names[i] + " class='popup_first'><p>View Image</p></a><a id=" + temp + " onclick='showMapWithKmlURL(this.id)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
         }
     }
 };
@@ -73,8 +73,9 @@ xhr.open('GET', '/peder/product_download_links.txt', true);
 xhr.send(null);
 
 
-function showMapWithKmlURL(e){
-    localStorage.setItem("kmlURL", "http://lundinblackoil.com/peder/kmlfiles/" + e.id + ".kml");
+function showMapWithKmlURL(image){
+    localStorage.setItem("kmlURL", "http://lundinblackoil.com/peder/kmlfiles/" + image + ".kml");
+    console.log(image)
     window.open('map.html', "_self");
 }
 
@@ -110,3 +111,6 @@ document.addEventListener("click", function(e){
         }
     }
 });
+
+
+

@@ -83,14 +83,15 @@
     <script>
         var map;
         var kmlURL = localStorage.getItem("kmlURL");
-        console.log(kmlURL);
+        var finalKML = kmlURL + '?time=' + (new Date().getTime()).toString()
+        console.log(finalKML);
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 64.397, lng: 7.644},
                 zoom: 4
             });
         var ctaLayer = new google.maps.KmlLayer({
-              url: kmlURL,
+              url: finalKML,
               map: map
         });
       }

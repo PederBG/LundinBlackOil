@@ -28,7 +28,7 @@ def getS1Data(geojson):
     yestdate = str(int(date)-1)
 
     products = api.query(footprint,
-                         ("20180107", date),
+                         (yestdate, date),
                          platformname='Sentinel-1',
                          producttype='GRD',
                          sensoroperationalmode='IW'
@@ -167,31 +167,30 @@ def addWindArrow(imNames, GRID):
 ##------------------------------------------------------------------------------
 
 ##------------------------------------------------------------------------------
-def generateKML(fileName, boundNorth, boundSouth, boundEast, boundWest):
+def generateKML(fileName, imageName, boundNorth, boundSouth, boundEast, boundWest):
 
     print("Making KML to overlay in Map.html...")
 
     txt_file = open("/home/lundinbl/public_html/peder/kmlfiles/" + fileName, "w")
     txt_file.write(
         '<?xml version="1.0" encoding="UTF-8"?>' + "\n" +
-        '<kml xmlns="http://earth.google.com/kml/2.0">' + "\n" +
-        '<Document>' + "\n" +
+        '<kml xmlns="http://www.opengis.net/kml/2.2">' + "\n" +
+        '<Folder>' + "\n" +
         '  <name>' + fileName + '</name>' + "\n" +
         '  <description>' + "\n" +
-        'TODOC</description>' + "\n" +
+        '    TODO</description>' + "\n" +
         '  <GroundOverlay>' + "\n" +
-        '    <name>Raster data</name>' + "\n" +
-        '      <LatLonBox>' + "\n" +
+        '  <Icon>' + "\n" +
+        '  <href>http://lundinblackoil.com/peder/sentinel_images_clear/' + imageName + '</href>' "\n" +
+        '    </Icon>' + "\n" +
+        '    <LatLonBox>' + "\n" +
         '      <north>' + str(boundNorth) + '</north>' + "\n" +
         '      <south>' + str(boundSouth) + '</south>' + "\n" +
         '      <east>' + str(boundEast) + '</east>' + "\n" +
         '      <west>' + str(boundWest) + '</west>' + "\n" +
         '    </LatLonBox>' + "\n" +
-        '    <Icon>' + "\n" +
-        '      <href>http://lundinblackoil.com/peder/sentinel_images/' + fileName + "\n" +
-        '    </Icon>' + "\n" +
         '  </GroundOverlay>' + "\n" +
-        '</Document>' + "\n" +
+        '</Folder>' + "\n" +
         '</kml>'
     )
     txt_file.close()

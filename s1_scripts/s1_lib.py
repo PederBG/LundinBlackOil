@@ -229,7 +229,14 @@ def genLUT2 (working, xmlFile, xmlFileBeam, outfile):
     print("GRIDS:")
     print("gird_y is", grid_y.nbytes, "bytes")
     print("gird_z0 is", grid_z0.nbytes, "bytes")
-   
+    print("grid_y:", grid_y)
+    print(type(grid_y))
+    print(len(grid_y))
+    print("grid_z0:", grid_y)
+    print(type(grid_z0))
+    print(len(grid_z0))
+
+
     print 'write cal file %s' % (outfile)
     driver = gdal.GetDriverByName( 'GTiff' )
     createopts=[ "COMPRESS=LZW", "BIGTIFF=YES"]

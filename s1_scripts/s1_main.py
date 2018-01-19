@@ -165,7 +165,7 @@ s1_func.addWindArrow([imageVV, imageVH], GRID)
 
 print('## Make KML-file')
 for i in range(nbands):
-    s1_func.generateKML(kmlNames[i], minlon, maxlon, minlat, maxlat)
+    s1_func.generateKML(kmlNames[i], justNames_clear[i], maxlat, minlat, maxlon, minlon)
 
 print('## Make thumbnail image')
 for i in range(nbands):
