@@ -37,8 +37,8 @@ xhr.onreadystatechange = function() {
 
             var img = document.createElement("img");
             img.setAttribute("src", names[i].split(".jpg")[0] + "_t.jpg");
-            img.setAttribute("height", "200");
-            img.setAttribute("width", "300");
+            img.setAttribute("height", "400");
+            img.setAttribute("width", "600");
             tar.appendChild(img);
 
             var desc = document.createElement("div");
@@ -64,8 +64,11 @@ xhr.onreadystatechange = function() {
             var popup = document.createElement("div");
             popup.setAttribute("class", "popup");
             res.appendChild(popup);
+            
+            var clearImage = "sentinel_images_clear/" + names[i].split('/')[1].split('.jpg')[0] + "_c.jpg"
+            console.log(clearImage)
 
-            popup.innerHTML = "<a href=" + names[i] + " class='popup_first'><p>View Image</p></a><a id=" + temp + " onclick='showMapWithKmlURL(this.id)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a>";
+            popup.innerHTML = "<a href=" + names[i] + " class='popup_first'><p>View Image</p></a><a id=" + temp + " onclick='showMapWithKmlURL(this.id)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a><a href=" + clearImage + " style='cursor: pointer'><p>View Clear Image</p></a>";
         }
     }
 };
@@ -94,12 +97,13 @@ function togglePopup(e){
         e.parentNode.style.opacity = '0.8';
     }
 }
-
+/*
 function downloadClearImage(image){
     clearImage = 'sentinel_images_clean/' + image.innerHTML.split('image')[0] + 'image(c)' + image.innerHTML.split('image')[1] + '.jpg';
     compPath = clearImage.split(':')[0] + '-' + clearImage.split(':')[1]
     window.location = compPath; //TODO fix this!
 }
+*/
 
 document.addEventListener("click", function(e){
     console.log(e.target.tagName);
