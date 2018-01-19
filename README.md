@@ -1,9 +1,15 @@
 # LundinBlackOil
-This project uses real-time SAR (synthetic aperture radar) satellite images from the Copernicus programme to monitor possible oil slicks in a specific area on the Norwegian continental shelf. It contains the complete native-javascript based web application and the python script using the ESA developed SNAP module to prosess raw SAFE-format Sentinel-1 data.
+This project uses real-time SAR (synthetic aperture radar) satellite images from the Copernicus programme to monitor possible oil slicks in a specific area on the Norwegian continental shelf. It contains the complete native-javascript based web application as well as python scripts used to process raw Sentinel-1 imagery.
 
-<p>Note: This project is meant to run on a linux server with a high RAM size. The code in DOWNLOAD.py also has a high number of module dependencies, making it hard to reproduce. Simply forking the repository will not work.
+The image processing has been through a major update and is no longer using the ESA developed SNAP module. It is now instead using the modules GDAL and SciFy/NumPy. All code used in the backend cron job is now placed in s1_scripts.
 
-<p>Also note that the image prosessing done by the SNAP module is having some
-issues with memory usage handling.
-Since the DOWNLOAD script isn't that well written, it is likely to be changed in the next major update. The plan is also to
-use GDAL for image prosessing instead of SNAP, removing everything that is dependent on the SNAP module.
+Note: This project is meant to run on a linux server with a high RAM size. The code in s1_scripts also has a high number of module dependencies, making it hard to reproduce. Simply forking the repository will not work.
+
+Also note that while image processing works fine on smaller Sentinel-1 files, is it likely to run into problems if the raw data is too big. SAFE-files exceeding about 800 MB will probably cause errors since the program runs out of memory during 2-D interpolation.
+
+##### Important dependecies:
+ - OSGeo/GDAL - Geospatial Data Abstraction Library: https://pypi.python.org/pypi/GDAL
+ - Scify / Numpy: https://www.scipy.org/install.html / https://pypi.python.org/pypi/numpy
+ - sentinelsat: https://github.com/sentinelsat/sentinelsat
+ - opencv-python (cv2): https://pypi.python.org/pypi/opencv-python
+ - Pillow: https://pypi.python.org/pypi/Pillow/2.2.1
