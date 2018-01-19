@@ -212,3 +212,13 @@ def makeThumbnail(inputName, saveName):
     height, width = resizeInput.shape[:2]
     resized = cv2.resize(resizeInput, (int(0.04 * width), int(0.04 * height)), interpolation=cv2.INTER_CUBIC)
     cv2.imwrite(saveName, resized)
+
+def makeZipFile(dirs=["sentinel_images", "sentinel_images_clear"]):
+    zf = zipfile.ZipFile("sentinel_images.zip", "w")
+    for i in range(dirs):
+        for dirname, subdirs, files in os.walk(dirs[i]):
+            zf.write(dirname)
+            for filename in files:
+                if "_t.jpg" not in filename:
+                    zf.write(os.path.join(dirname, filename))
+    zf.close()

@@ -175,6 +175,9 @@ print('## Append to download links file')
 for i in range(nbands):
     s1_func.genDownloadLinks(s1Link, linksFile, justNames[i])
 
+print('## Update zipfile used for direct download')
+s1_func.makeZipFile()
+
 print('## Removed used files')
 s1_func.cleaner()
 for i in range(nbands):
