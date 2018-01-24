@@ -25,7 +25,7 @@ subprocess.call('mkdir tmp', shell=True)
 GDALHOME='/home/lundinbl/gdal/bin'
 PROJSTR = '+proj=stere +lat_0=90.0 +lat_ts=90.0 +lon_0=0.0 +R=6371000'
 GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
-MAXWIND = 9999 # If the wind speed is higher image will not be generated
+MAXWIND = 12 # If the wind speed is higher image will not be generated
 
 print('## Check if wind is low enough to run image')
 #s1_func.getAverageWind(GRID) TODO
@@ -177,6 +177,8 @@ for i in range(nbands):
 
 print('## Removed used files')
 s1_func.cleaner()
+s1_func.cleaner(infile)
+s1_func.cleaner(s1Name + ".zip")
 for i in range(nbands):
     s1_func.cleaner(imagenames[i] + ".aux.xml")
     s1_func.cleaner(imagenames_clear[i] + ".aux.xml")

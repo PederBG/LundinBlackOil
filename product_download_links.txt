@@ -1,2 +1,4 @@
 sentinel_images/sentinel-imageVV_18-01-2018_15-43.jpg https://colhub.met.no/odata/v1/Products('47298c71-4f01-433b-aef4-ab3d26fa548e')/$value
 sentinel_images/sentinel-imageVH_18-01-2018_15-43.jpg https://colhub.met.no/odata/v1/Products('47298c71-4f01-433b-aef4-ab3d26fa548e')/$value
+sentinel_images/sentinel-imageVV_22-01-2018_05-27.jpg https://colhub.met.no/odata/v1/Products('fe6f1089-32cd-4b19-99c9-9e5ea81dafea')/$value
+sentinel_images/sentinel-imageVH_22-01-2018_05-27.jpg https://colhub.met.no/odata/v1/Products('fe6f1089-32cd-4b19-99c9-9e5ea81dafea')/$value

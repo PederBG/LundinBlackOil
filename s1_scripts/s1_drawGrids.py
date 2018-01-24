@@ -19,9 +19,9 @@ def getPixfromCor(cor, srsLatLong, srs, xOrigin, yOrigin, pixelWidth, pixelHeigh
 
 def getGeoInfo(target_file = "tmp/warpedVV.tif"):
     coordinates = []
-    for i in range(10):
+    for i in range(15):
         for j in range(10):
-            coordinates.append( (18+i, 65+j) )
+            coordinates.append( (17+i, 65+j) )
 
     dataset = gdal.Open(target_file)
     band = dataset.GetRasterBand(1)
