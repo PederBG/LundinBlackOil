@@ -17,7 +17,7 @@ GDALHOME='/home/lundinbl/gdal/bin'
 HOMEDIR = '/home/lundinbl/public_html/peder'
 
 ##------------------------------------------------------------------------------
-def getS1Data(geojson):
+def getS1Data(geojson, max_size):
     # connect to the API
     # api = SentinelAPI('PederBG', 'Copernicus', 'https://scihub.copernicus.eu/dhus') # For areas outside Norway
     api = SentinelAPI('PederBG', 'Copernicus',
@@ -34,40 +34,38 @@ def getS1Data(geojson):
                          producttype='GRD',
                          sensoroperationalmode='IW'
                          )
+    results = []
 
     if len(products) == 0:
         print("No files found at date: " + date)
         quit()
     print("Found", len(products), "Sentinel-1 images.")
 
-    products_df = api.to_dataframe(products)
+    products_df = api.to_dataframe(products).sort_values('size', ascending=False)
     for i in range(len(products_df)):
-        print( "Name:", api.get_product_odata(products_df.index[i])["title"], "size:", \
-         str(int(api.get_product_odata(products_df.index[i])["size"]) / 1000000), "MB" )
+        product_size = int(api.get_product_odata(products_df.index[i])["size"])
+        if (product_size < max_size):
+            results.append(products_df.index[i])
+            print "Name:", api.get_product_odata(products_df.index[i])["title"], "size:", \
+            str(product_size / 1000000), "MB.  |ADDED|"
+        else:
+            print "Name:", api.get_product_odata(products_df.index[i])["title"], "size:", \
+             str(product_size / 1000000), "MB.  |TOO BIG|"
 
-    # FINDING SMALLEST FILE
-    smallestFile = None
-    tempSize = 999999999999
-    #tempSize = 1
-    for i in range(0, len(products)):
-        if (api.get_product_odata(products_df.index[i])["size"] < tempSize):
-            smallestFile = products_df.index[i]
-            tempSize = api.get_product_odata(products_df.index[i])["size"]
-    # ----------------------------------------------------------------
+    return results
+## -----------------------------------------------------------------------------
 
-    # SETTING MAX SIZE AND GETTING PRODUCT INFO
-    maxSize = 2 * 1000000000  # Set the max size for files to download (in bytes)
-    if (tempSize < maxSize):
-        s1File = smallestFile
-        api.download(s1File)
-        s1Name = api.get_product_odata(s1File)["title"]
-        s1Date = api.get_product_odata(s1File)["date"].strftime("%d-%m-%Y_%H-%M") # ":" cause error in windowsOS and with KML links
-        s1Link = api.get_product_odata(s1File)["url"]
-        print("Downloaded " + s1Name + ", Size: " + str(tempSize) + " bytes.")
-        print("----------------___>", s1Link)
-    else:
-        print("No file small enough to download")
-        quit()
+
+## -----------------------------------------------------------------------------
+def downloadS1Data(s1File):
+    # DOWNLOAD PRODUCT
+    api.download(s1File)
+    # GETTING PRODUCT INFO
+    s1Name = api.get_product_odata(s1File)["title"]
+    s1Date = api.get_product_odata(s1File)["date"].strftime("%d-%m-%Y_%H-%M") # ":" cause error in windowsOS and with KML links
+    s1Link = api.get_product_odata(s1File)["url"]
+    print("Downloaded " + s1Name + ", Size: " + str(tempSize) + " bytes.")
+    print("Link:", s1Link)
 
     # UNZIPPING DOWNLOADED FILE
     print("Unzipping product")
