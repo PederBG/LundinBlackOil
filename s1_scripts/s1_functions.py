@@ -21,7 +21,7 @@ HOMEDIR = '/home/lundinbl/public_html/peder'
 # api = SentinelAPI('PederBG', 'Copernicus', 'https://scihub.copernicus.eu/dhus') # For areas outside Norway
 api = SentinelAPI('PederBG', 'Copernicus',
                   'https://colhub.met.no/#/home')  # Use this if the area of interest is within Norway
-                  
+
 def getS1Data(geojson, max_size):
     # search by polygon, time, and SciHub query keywords
     footprint = geojson_to_wkt(read_geojson(geojson))
@@ -197,8 +197,14 @@ def generateKML(fileName, imageName, boundNorth, boundSouth, boundEast, boundWes
 ##------------------------------------------------------------------------------
 
 def genDownloadLinks(s1Link, linksFile, imName):
-    txt_file = open(linksFile, "a")
-    txt_file.write("sentinel_images/" + imName + ' ' + str(s1Link) + "\n")
+    txt_file = open(linksFile, "r+")
+    links = txt_file.read()
+    if (imName not in links):
+        txt_file.write("sentinel_images/" + imName + ' ' + str(s1Link) + "\n")
+        print("Link added")
+    else:
+        print("Link not added, image already exist")
+
     txt_file.close()
 
 def getAverageWind(GRID):
