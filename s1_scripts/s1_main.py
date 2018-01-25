@@ -20,12 +20,11 @@ import s1_functions as s1_func
 import s1_drawGrids as s1_draw
 
 TMPDIR = '/home/lundinbl/public_html/peder/s1_scripts/tmp'
-subprocess.call('mkdir tmp', shell=True)
 
 GDALHOME='/home/lundinbl/gdal/bin'
 PROJSTR = '+proj=stere +lat_0=90.0 +lat_ts=90.0 +lon_0=0.0 +R=6371000'
 GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
-MAXWIND = 12 # If the wind speed is higher image will not be generated
+MAXWIND = 120 # If the wind speed is higher image will not be generated
 MAX_FILE_DOWNLOADS = 4  # The maximum amount of files to download and process
 
 print('## Check if wind is low enough to run image')
@@ -46,6 +45,8 @@ for numb in range(len(s1Files)):
     print('## Downloading file', numb, "of", len(s1Files))
     [s1File, s1Name, s1Date, s1Link] = s1_func.downloadS1Data( s1Files[numb] )
     infile = s1Name + ".SAFE"
+
+    subprocess.call('mkdir tmp', shell=True)
 
     workingVV = TMPDIR + "/workingVV.tif"
     workingVH = TMPDIR + "/workingVH.tif"

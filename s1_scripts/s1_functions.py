@@ -17,12 +17,12 @@ GDALHOME='/home/lundinbl/gdal/bin'
 HOMEDIR = '/home/lundinbl/public_html/peder'
 
 ##------------------------------------------------------------------------------
+# connect to the API
+# api = SentinelAPI('PederBG', 'Copernicus', 'https://scihub.copernicus.eu/dhus') # For areas outside Norway
+api = SentinelAPI('PederBG', 'Copernicus',
+                  'https://colhub.met.no/#/home')  # Use this if the area of interest is within Norway
+                  
 def getS1Data(geojson, max_size):
-    # connect to the API
-    # api = SentinelAPI('PederBG', 'Copernicus', 'https://scihub.copernicus.eu/dhus') # For areas outside Norway
-    api = SentinelAPI('PederBG', 'Copernicus',
-                      'https://colhub.met.no/#/home')  # Use this if the area of interest is within Norway
-
     # search by polygon, time, and SciHub query keywords
     footprint = geojson_to_wkt(read_geojson(geojson))
     date = time.strftime("%Y%m%d")
@@ -64,7 +64,8 @@ def downloadS1Data(s1File):
     s1Name = api.get_product_odata(s1File)["title"]
     s1Date = api.get_product_odata(s1File)["date"].strftime("%d-%m-%Y_%H-%M") # ":" cause error in windowsOS and with KML links
     s1Link = api.get_product_odata(s1File)["url"]
-    print("Downloaded " + s1Name + ", Size: " + str(tempSize) + " bytes.")
+    s1Size = api.get_product_odata(s1File)["size"]
+    print("Downloaded " + s1Name + ", Size: " + str(s1Size) + " bytes.")
     print("Link:", s1Link)
 
     # UNZIPPING DOWNLOADED FILE
