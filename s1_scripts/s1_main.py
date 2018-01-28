@@ -24,7 +24,7 @@ TMPDIR = '/home/lundinbl/public_html/peder/s1_scripts/tmp'
 GDALHOME='/home/lundinbl/gdal/bin'
 PROJSTR = '+proj=stere +lat_0=90.0 +lat_ts=90.0 +lon_0=0.0 +R=6371000'
 GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
-MAXWIND = 120 # If the wind speed is higher image will not be generated
+MAXWIND = 12 # If the wind speed is higher image will not be generated
 MAX_FILE_DOWNLOADS = 4  # The maximum amount of files to download and process
 
 print('## Check if wind is low enough to run image')
@@ -113,75 +113,81 @@ for numb in range(len(s1Files)):
     print("minlon:", minlon, "maxlon:", maxlon, "minlat:", minlat, "maxlat:", maxlat)
     print("")
 
-    print('## Apply gcps')
-    s1_lib.s1applygcp( infiles, working, nbands, gcps )
+    # TODO: CALIBRATION DOES NOT WORK IF IMAGE CONTAINS LAND
+    # TODO: GET A BETTER SOLUTION
+    if minlat > 71:
 
-    print('## Find Noise xml files for band VV and VH')
-    (xmlNoiseFileVV,xmlNoiseFileVH) = s1_lib.getNoiseXML(infile)
-    xmlNoiseFile = [xmlNoiseFileVV,xmlNoiseFileVH]
+        print('## Apply gcps')
+        s1_lib.s1applygcp( infiles, working, nbands, gcps )
 
-    print('## Find Calibration xml files for band VV and VH')
-    (xmlCalFileVV,xmlCalFileVH) = s1_lib.getCalXML(infile)
-    xmlCalFile = [xmlCalFileVV,xmlCalFileVH]
+        print('## Find Noise xml files for band VV and VH')
+        (xmlNoiseFileVV,xmlNoiseFileVH) = s1_lib.getNoiseXML(infile)
+        xmlNoiseFile = [xmlNoiseFileVV,xmlNoiseFileVH]
 
-    print('## Find xmlfile with scene inforamtion')
-    (xmlFileVV,xmlFileVH) = s1_lib.getXML(infile)
-    xmlFile = [xmlFileVV,xmlFileVH]
+        print('## Find Calibration xml files for band VV and VH')
+        (xmlCalFileVV,xmlCalFileVH) = s1_lib.getCalXML(infile)
+        xmlCalFile = [xmlCalFileVV,xmlCalFileVH]
 
-    print('## Generate LUT (2) files for noise')
-    s1_lib.genLUT2(working[0], xmlNoiseFile[0], xmlFile[0] ,noisefname[0])
-    s1_lib.genLUT2(working[1], xmlNoiseFile[1], xmlFile[1], noisefname[1])
+        print('## Find xmlfile with scene inforamtion')
+        (xmlFileVV,xmlFileVH) = s1_lib.getXML(infile)
+        xmlFile = [xmlFileVV,xmlFileVH]
 
-    print('## Generate LUT files for s0 calibration')
-    s1_lib.genLUT(working[0], xmlCalFile[0], calfname[0])
-    s1_lib.genLUT(working[1], xmlCalFile[1], calfname[1])
+        print('## Generate LUT (2) files for noise')
+        s1_lib.genLUT2(working[0], xmlNoiseFile[0], xmlFile[0] ,noisefname[0])
+        s1_lib.genLUT2(working[1], xmlNoiseFile[1], xmlFile[1], noisefname[1])
 
-    print('## Remove Noise and Calibrate data to db')
-    log10=0
-    s1_lib.calibrate2d(working[0], calfname[0], noisefname[0], calibrated[0],log10)
-    s1_lib.calibrate2d(working[1], calfname[1], noisefname[1], calibrated[1],log10)
+        print('## Generate LUT files for s0 calibration')
+        s1_lib.genLUT(working[0], xmlCalFile[0], calfname[0])
+        s1_lib.genLUT(working[1], xmlCalFile[1], calfname[1])
 
-    print('Warping to polarstereographic projection')
-    for i in range(nbands):
-        s1_lib.s1warp(calibrated[i],warpfname[i],PROJSTR)
-        if ((os.path.isfile(warpfname[i]) == False)):
-            print 'Error warping file'
-            sys.exit()
+        print('## Remove Noise and Calibrate data to db')
+        log10=0
+        s1_lib.calibrate2d(working[0], calfname[0], noisefname[0], calibrated[0],log10)
+        s1_lib.calibrate2d(working[1], calfname[1], noisefname[1], calibrated[1],log10)
 
-    print('## Copy the clear image before adding grid overlay')
-    for i in range(nbands):
-        cp( warpfname[i], warpfname_clear[i])
+        print('Warping to polarstereographic projection')
+        for i in range(nbands):
+            s1_lib.s1warp(calibrated[i],warpfname[i],PROJSTR)
+            if ((os.path.isfile(warpfname[i]) == False)):
+                print 'Error warping file'
+                sys.exit()
 
-    print('## Add graticule overlay')
-    s1_func.mkGraticule()
-    for i in range(nbands):
-        s1_func.addGraticule(warpfname[i])
+        print('## Copy the clear image before adding grid overlay')
+        for i in range(nbands):
+            cp( warpfname[i], warpfname_clear[i])
+
+        print('## Add graticule overlay')
+        s1_func.mkGraticule()
+        for i in range(nbands):
+            s1_func.addGraticule(warpfname[i])
 
 
-    print('## Generate JPEG from warped tif-file')
-    for i in range(nbands):
-        s1_lib.s1image(warpfname[i], imagenames[i])
-        s1_lib.s1image(warpfname_clear[i], imagenames_clear[i])
+        print('## Generate JPEG from warped tif-file')
+        for i in range(nbands):
+            s1_lib.s1image(warpfname[i], imagenames[i])
+            s1_lib.s1image(warpfname_clear[i], imagenames_clear[i])
 
-    print('## Add reference coordinates to graticule overlay')
-    [pixels, coordinates] = s1_draw.getGeoInfo()
-    for i in range(nbands):
-        s1_draw.drawCords(pixels, coordinates, imagenames[i], imagenames[i])
+        print('## Add reference coordinates to graticule overlay')
+        [pixels, coordinates] = s1_draw.getGeoInfo()
+        for i in range(nbands):
+            s1_draw.drawCords(pixels, coordinates, imagenames[i], imagenames[i])
 
-    print('## Add wind information from yr.no')
-    s1_func.addWindArrow([imageVV, imageVH], GRID)
+        print('## Add wind information from yr.no')
+        s1_func.addWindArrow([imageVV, imageVH], GRID)
 
-    print('## Make KML-file')
-    for i in range(nbands):
-        s1_func.generateKML(kmlNames[i], justNames_clear[i], maxlat, minlat, maxlon, minlon)
+        print('## Make KML-file')
+        for i in range(nbands):
+            s1_func.generateKML(kmlNames[i], justNames_clear[i], maxlat, minlat, maxlon, minlon)
 
-    print('## Make thumbnail image')
-    for i in range(nbands):
-        s1_func.makeThumbnail(imagenames_clear[i], imagenames_thumb[i])
+        print('## Make thumbnail image')
+        for i in range(nbands):
+            s1_func.makeThumbnail(imagenames_clear[i], imagenames_thumb[i])
 
-    print('## Append to download links file')
-    for i in range(nbands):
-        s1_func.genDownloadLinks(s1Link, linksFile, justNames[i])
+        print('## Append to download links file')
+        for i in range(nbands):
+            s1_func.genDownloadLinks(s1Link, linksFile, justNames[i])
+    else:
+        print("Image too far south and may contain landmass. Not added.")
 
     print('## Removed used files')
     s1_func.cleaner()

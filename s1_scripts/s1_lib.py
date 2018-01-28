@@ -219,8 +219,6 @@ def genLUT2 (working, xmlFile, xmlFileBeam, outfile):
     print 'Start interpolating'
     print xsize,ysize
 
-    from sys import getsizeof
-
     valList = numpy.array(valList)
     points = numpy.array([line,pix]).transpose()
     #grid_y, grid_x = numpy.meshgrid(numpy.arange(0, ysize, 1), numpy.arange(0, xsize, 1))
