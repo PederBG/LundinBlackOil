@@ -26,6 +26,7 @@ PROJSTR = '+proj=stere +lat_0=90.0 +lat_ts=90.0 +lon_0=0.0 +R=6371000'
 GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
 MAXWIND = 12 # If the wind speed is higher image will not be generated
 MAX_FILE_DOWNLOADS = 4  # The maximum amount of files to download and process
+MIN_LAT = 70.8
 
 print('## Check if wind is low enough to run image')
 #s1_func.getAverageWind(GRID) TODO
@@ -42,7 +43,7 @@ s1Files = s1Files[:MAX_FILE_DOWNLOADS]
 print('## Starting main loop:')
 print('########################################################################')
 for numb in range(len(s1Files)):
-    print('## Downloading file', numb, "of", len(s1Files))
+    print('## Downloading file', numb + 1, "of", len(s1Files))
     [s1File, s1Name, s1Date, s1Link] = s1_func.downloadS1Data( s1Files[numb] )
     infile = s1Name + ".SAFE"
 
@@ -115,7 +116,7 @@ for numb in range(len(s1Files)):
 
     # TODO: CALIBRATION DOES NOT WORK IF IMAGE CONTAINS LAND
     # TODO: GET A BETTER SOLUTION
-    if minlat > 71:
+    if minlat > MIN_LAT:
 
         print('## Apply gcps')
         s1_lib.s1applygcp( infiles, working, nbands, gcps )
