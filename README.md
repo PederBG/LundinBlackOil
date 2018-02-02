@@ -1,5 +1,5 @@
 # LundinBlackOil
-This project uses real-time SAR (synthetic aperture radar) satellite images from the Copernicus programme to monitor possible oil slicks in a specific area on the Norwegian continental shelf. It contains the complete native-javascript based web application as well as python scripts used to process raw Sentinel-1 imagery.
+This project uses real-time SAR (synthetic aperture radar) satellite images from the Copernicus programme to monitor possible oil slicks in a specific area on the Norwegian continental shelf. It contains the complete native-javascript based web application as well as python scripts used to process raw Sentinel-1 imagery. Generated images are used as training data for machine learning, as of now implemented with SVM (Support Vector Machines). This is another part of the project and therefore not available in this repository.
 
 The image processing has been through a major update and is no longer using the ESA developed SNAP module. It is now instead using the modules GDAL and SciFy/NumPy. All code used in the back end cron job is now placed in s1_scripts.
 

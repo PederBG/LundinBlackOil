@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-    
+
     <title>Sentinel-1 Data</title>
     <link rel="stylesheet" href="style/navbar.css" type="text/css">
     <link rel="stylesheet" href="style/sentinel.css" type="text/css">
@@ -21,8 +21,8 @@
 <!-- ------------------ ------ ----------------- -->
     <a class="text" id="title">Lundin Sentinel Image-Hub</a>
     <a class="text" id="link" href="sentinel_images.zip">Download all images (.zip)</a>
-    <p><a class="text" id="underText"><!--Autonomous image downloading is running. New auto-generated image added 11:00 PM (GMT), marked with (a).-->New version under development, auto-generating is off.</a></p>
-    
+    <p><a class="text" id="underText">Autonomous image downloading is running. New auto-generated images added 11:00 PM (GMT), provided that the area has satellite cover for the given day.</a></p>
+
 
     <div id="fadeOut"></div>
 
@@ -31,7 +31,8 @@
 
         <h2>About the hub:</h2>
         <p>The hub contains Sentinel-1 backscatter images from Lundin's landing site in the Barents Sea. New images are generated at 11:00 PM (GMT) each day. Note that some days the Sentinel-1 satelites does not orbit over the landing area and therefore no image will be added. <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-1/satellite-description/geographical-coverage" style="color:IndianRed">Click here</a> for detailed information about the orbit cycle. Satelite data are provided by The Copernicus Programme, directed by the European Commission.</p>
-        <p>By clicking on the Download-button under each image it is possible to download the original Sentinel data from Copernicus Colhub (MET NBS version) download site. Note that this data is password protected and requires a Colhub user. <a target="_blank" href="https://colhub.met.no/#/self-registration" style="color:IndianRed">Click here</a> to register a new Colhub account. Also note that these files can be very large and downloading raw data can therefore be time consuming. It is also possible to download all listed images in a compressed directory.</p><p>Here follows technical information about the provided images. Click the ESA logo for explanations.</p>
+        <p>By clicking on the Download-button under each image it is possible to download the original Sentinel data from Copernicus Colhub (MET NBS version) download site. Note that this data is password protected and requires a Colhub user. <a target="_blank" href="https://colhub.met.no/#/self-registration" style="color:IndianRed">Click here</a> to register a new Colhub account. Also note that these files can be very large and downloading raw data can therefore be time consuming. It is also possible to download all listed images in a compressed directory.</p>
+        <p>Here follows technical information about the provided images. Click the ESA logo for explanations.</p>
         <div id="infoInner">
             <p><b>Update interval: </b>New images generated once a day, at 11:00 PM (GMT)</p>
             <p><b>Landing site: </b>Square with 50 km sides, center grid: 72&deg;17'32''N, 21&deg;48'20''E</p>
@@ -53,27 +54,27 @@
         <div class="logos" id="logoFour" style="cursor: pointer;" onclick="window.open('https://www.yr.no/place/Hav/72.2922222_21.8055556/', '_blank');"></div>
         <div id="logoFive" style="cursor: pointer;" onclick="window.open('https://img.buzzfeed.com/buzzfeed-static/static/2014-09/18/14/enhanced/webdr08/anigif_enhanced-15063-1411066066-1.gif', '_blank');">Grundvold Consulting</div>
     </div>
-    
-    
+
+
 	<script type="text/javascript">
 	    var infoBox = document.getElementById("infoBox");
 	    var fadeOut= document.getElementById("fadeOut");
-	
-	
+
+
 	    function openInfo(){
 	        if (infoBox.style.display != "block"){
 		    infoBox.style.display = "block";
 		    fadeOut.style.display = "block";
-	
+
 		}
 		else{
 		    infoBox.style.display = "none";
 		    fadeOut.style.display = "none";
-	
+
 		}
 	    }
 	</script>
-	
+
     <div id="images">
     <!-- Images are placed here -->
     </div>
