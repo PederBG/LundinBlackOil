@@ -13,3 +13,11 @@ Also note that while image processing works fine on smaller Sentinel-1 files, is
  - sentinelsat: https://github.com/sentinelsat/sentinelsat
  - opencv-python (cv2): https://pypi.python.org/pypi/opencv-python
  - Pillow: https://pypi.python.org/pypi/Pillow/2.2.1
+ 
+ ##### Run main script as cron job (Linux CentOS):
+ ```
+ source ~/.bash_profile &&
+ source ~/.bashrccd &&
+ /path/to/repo/s1_scripts/ &&
+ python s1_main.py
+ ```
