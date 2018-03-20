@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Folder>
+  <name>sentinel-imageVV_17-03-2018_05-27.kml</name>
+  <description>
+    TODO</description>
+  <GroundOverlay>
+  <Icon>
+  <href>http://lundinblackoil.com/peder/sentinel_images_clear/sentinel-imageVV_17-03-2018_05-27_c.jpg</href>
+    </Icon>
+    <LatLonBox>
+      <north>73.4989335132</north>
+      <south>71.0474609904</south>
+      <east>23.8642942506</east>
+      <west>15.0937786015</west>
+    </LatLonBox>
+  </GroundOverlay>
+</Folder>
+</kml>

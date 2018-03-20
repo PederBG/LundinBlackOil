@@ -14,7 +14,7 @@ html{
 #title{
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     font-weight: bold;
-    color: #23445c;
+    color: #001a33;
     background-color: #f5f6f5;
     border-radius: 80%;
     font-size: 2.5em;
@@ -32,17 +32,17 @@ html{
     margin-top: 80px;
     margin-bottom: 20px;
     font-size: medium;
-    width: 30%;
-    left: 35%;
-    background-color: gray;
-    border-radius: 30%;
+    width: 25%;
+    left: 37.5%;
+    background-color: #666a6d;
+    border-radius: 20%;
     text-decoration: none;
-    color: whitesmoke;
+    color: white;
     padding: 3px 0 3px 0;
     border: solid 0.5px #70888b;
 }
 #link:hover{
-    background-color: darkgray;
+    background-color: #999999;
     color: #B22222;
     padding: 4px 0 4px 0;
 }
@@ -150,22 +150,22 @@ html{
 }
 
 #logoOne{
-    background-image: url("../images/lundinv23.gif");    
+    background-image: url("../images/lundinv23.gif");
     width: 150px;
     margin-left: -25px;
 }
 #logoTwo{
-    background-image: url("../images/esa.png");    
+    background-image: url("../images/esa.png");
     margin-left: 150px;
     width: 136px;
 }
 #logoThree{
-    background-image: url("../images/copernicus.png");    
+    background-image: url("../images/copernicus.png");
     margin-left: 320px;
     width: 165px;
 }
 #logoFour{
-    background-image: url("../images/yr.png");    
+    background-image: url("../images/yr.png");
     margin-left: 520px;
     width: 60px;
 }
@@ -284,4 +284,3 @@ div.desc {
     padding: 8px 0 8px 0;
 }
 /* ----------------------------------- */
-

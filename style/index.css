@@ -1,6 +1,5 @@
 html {
-  background-image: url(../images/indexBackground.jpg);
-  background-size: 500%;
+  background-color:  #e6e6e6;
   height: 90%;
 }
 
@@ -30,18 +29,21 @@ body {
 
 h1 {
   margin-bottom: 50px;
-  font-size: 160%;
+  font-size: 200%;
+  color: #00111a;
+  font-variant: small-caps;
+  font-family:sans-serif;
 }
 
 .button {
   padding: 10px 1px 10px 1px;
-  border: 1px solid darkcyan;
+  border: 1px solid gray;
   display: block;
   max-width: 50%;
   margin: auto;
-  border-radius: 25%;
-  background-color: #396060;
-  color: sandybrown;
+  border-radius: 18%;
+  background-color: #000d1a;
+  color: #ff944d;
   margin-bottom: 5px;
 }
 
@@ -49,12 +51,8 @@ h1 {
   text-decoration: none;
 }
 
-.button:visited {
-  background-color: #437070;
-}
-
 .button:hover {
-  background-color: #305050;
+  background-color: #0d1d2a;
   max-width: 55%;
 }
 
@@ -78,12 +76,16 @@ h1 {
     font-size: 450%;
     margin-bottom: 2em;
   }
-  
+
   .button {
     font-size: 350%;
     margin-bottom: 1em;
     max-width: 80%;
     padding: 25px 2px 25px 2px;
+  }
+  .button:hover {
+    background-color: #305050;
+    max-width: 85%;
   }
 }
 

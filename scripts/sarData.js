@@ -17,11 +17,11 @@ xhr.onreadystatechange = function() {
         }
 
 
-        console.log(names);
-        console.log(links);
+        //console.log(names);
+        //console.log(links);
 
         for (i in names) {
-            console.log(names[i]);
+            //console.log(names[i]);
             listFiles.push(names[i]);
             var res = document.createElement("div");
             res.setAttribute("class", "responsive");
@@ -43,30 +43,19 @@ xhr.onreadystatechange = function() {
 
             var desc = document.createElement("div");
             desc.setAttribute("class", "desc");
-            //desc.setAttribute("href", "sentinel_images_clean/sentinel-image(C)_15-09-2017_15-35.png");
+
             var temp = names[i].split('.jpg')[0].split('sentinel_images/')[1];
             if (temp.indexOf(':') == -1) {
-                tempName = temp.split('-').slice(0,4).join('-') + ':' + temp.split('-')[4]; //Used to display time bether
+                temp = temp.split('-').slice(0,4).join('-') + ':' + temp.split('-')[4]; //Used to display time bether
             }
-            else {
-                tempName = temp;
-            }
-            testName = "<div onclick='downloadClearImage(this)' style='cursor:pointer;'>" + tempName + "</div>";
-
-            if (i < (result.length - 2) - 35){ // Bad solution, but works..
-                desc.innerHTML = testName;
-            }
-            else{
-                desc.innerHTML = tempName
-            }
-            gal.appendChild(desc)
+            desc.innerHTML = temp;
+            gal.appendChild(desc);
 
             var popup = document.createElement("div");
             popup.setAttribute("class", "popup");
             res.appendChild(popup);
             
             var clearImage = "sentinel_images_clear/" + names[i].split('/')[1].split('.jpg')[0] + "_c.jpg"
-            console.log(clearImage)
 
             popup.innerHTML = "<a href=" + names[i] + " class='popup_first'><p>View Image</p></a><a id=" + temp + " onclick='showMapWithKmlURL(this.id)' style='cursor: pointer'>" + "<p>View in Map</p>" + "</a>" + "<a href="+links[i]+">" + "<p>Download Raw Data</p>" + "</a><a href=" + clearImage + " style='cursor: pointer'><p>View Clear Image</p></a>";
         }
@@ -97,13 +86,7 @@ function togglePopup(e){
         e.parentNode.style.opacity = '0.8';
     }
 }
-/*
-function downloadClearImage(image){
-    clearImage = 'sentinel_images_clean/' + image.innerHTML.split('image')[0] + 'image(c)' + image.innerHTML.split('image')[1] + '.jpg';
-    compPath = clearImage.split(':')[0] + '-' + clearImage.split(':')[1]
-    window.location = compPath; //TODO fix this!
-}
-*/
+
 
 document.addEventListener("click", function(e){
     console.log(e.target.tagName);

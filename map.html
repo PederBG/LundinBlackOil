@@ -83,7 +83,9 @@
     <script>
         var map;
         var kmlURL = localStorage.getItem("kmlURL");
-        var finalKML = kmlURL + '?time=' + (new Date().getTime()).toString()
+	var splitURL = kmlURL.split(":");
+        var finalKML = splitURL[0] + ":" + splitURL[1] + "-" + splitURL[2]
+		 + '?time=' + (new Date().getTime()).toString() // One-indexed ?
         console.log(finalKML);
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {

@@ -6,7 +6,7 @@
     background-color: #222;
 }
 
-@media (max-width: 90em) {
+@media (max-width: 80em) {
     #navbar ul {
         font-size: 2em;
     }
