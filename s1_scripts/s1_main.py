@@ -26,7 +26,7 @@ PROJSTR = '+proj=stere +lat_0=90.0 +lat_ts=90.0 +lon_0=0.0 +R=6371000'
 GRID = '72.2922222_21.8055556'  # LANDING SITE GRID (center of square)
 MAXWIND = 12 # If the wind speed is higher image will not be generated
 MAX_FILE_DOWNLOADS = 4  # The maximum amount of files to download and process
-MIN_LAT = 70.8
+MIN_LAT = 71
 
 print('## Check if wind is low enough to run image')
 #s1_func.getAverageWind(GRID) TODO
@@ -36,7 +36,7 @@ if windSpeed > MAXWIND:
     quit()
 
 print('## Get newest Sentinel-1 data')
-s1Files = s1_func.getS1Data("../smallBarentsSea.geojson", 200000000)
+s1Files = s1_func.getS1Data("../smallBarentsSea.geojson", 400000000)
 
 s1Files = s1Files[:MAX_FILE_DOWNLOADS]
 

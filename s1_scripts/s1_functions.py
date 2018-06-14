@@ -220,7 +220,7 @@ def makeThumbnail(inputName, saveName):
     cv2.imwrite(saveName, resized)
 
 def makeZipFile(dirs=[HOMEDIR +"/sentinel_images", HOMEDIR+"/sentinel_images_clear"]):
-    zf = zipfile.ZipFile(HOMEDIR + "/sentinel_images.zip", "w")
+    zf = zipfile.ZipFile(HOMEDIR + "/sentinel_images.zip", "w", allowZip64 = True)
     for i in range(len(dirs)):
         for dirname, subdirs, files in os.walk(dirs[i]):
             zf.write(dirname)
